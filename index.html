@@ -1,281 +1,552 @@
+
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Colombia RP Vehicles</title>
+<html>
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LCH6DV36MY"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        gtag('config', 'G-LCH6DV36MY');
+        </script>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Inter,sans-serif;
-}
+        <meta charset="utf-8"/>
+        <meta property="og:site_name" content="ER:LC Hub">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="ER:LC Vehicle Stats">
+        <title>ER:LC Vehicle Stats - ER:LC Hub</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta name="description" content="View statistics for vehicles inside of Emergency Response: Libery County. View loads of information with interactive graphs and score calculations, all to provide a quick and easy experience!">
+        <meta name="viewport" content="width=device-width, initial-scale=0.75">
 
-body{
-    background:#0f1115;
-    color:#fff;
-}
-
-header{
-    background:#161a22;
-    padding:20px;
-    border-bottom:1px solid #262c38;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-.logo{
-    font-size:28px;
-    font-weight:700;
-}
-
-.search-box{
-    margin-top:15px;
-}
-
-input{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    border:none;
-    background:#202631;
-    color:white;
-    font-size:16px;
-}
-
-.container{
-    padding:30px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:20px;
-}
-
-.card{
-    background:#161a22;
-    border:1px solid #252d3b;
-    border-radius:18px;
-    overflow:hidden;
-    transition:.2s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-}
-
-.card img{
-    width:100%;
-    height:210px;
-    object-fit:cover;
-    background:#0b0e13;
-}
-
-.info{
-    padding:20px;
-}
-
-.vehicle-name{
-    font-size:22px;
-    font-weight:700;
-}
-
-.year{
-    color:#aab3c5;
-    margin-top:4px;
-}
-
-.price{
-    margin-top:12px;
-    font-size:28px;
-    color:#59d97b;
-    font-weight:700;
-}
-
-.stat{
-    margin-top:12px;
-}
-
-.stat-top{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:5px;
-}
-
-.bar{
-    background:#222936;
-    border-radius:999px;
-    overflow:hidden;
-    height:10px;
-}
-
-.fill{
-    background:#3b82f6;
-    height:100%;
-}
-
-button{
-    width:100%;
-    margin-top:18px;
-    border:none;
-    background:#2d8cff;
-    color:white;
-    padding:15px;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:700;
-}
-
-button:hover{
-    background:#1d79e8;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-    <div class="logo">🚗 Colombia RP Vehicles</div>
-
-    <div class="search-box">
-        <input type="text" id="search" placeholder="Buscar vehículo...">
-    </div>
-</header>
-
-<div class="container">
-    <div class="grid" id="vehicleGrid"></div>
-</div>
-
-<script>
-const vehicles = [
-{
-    name:"Chevlon Captain",
-    year:"1992",
-    price:"13.000",
-    speed:70,
-    accel:58,
-    braking:63,
-    image:"https://cdn.discordapp.com/attachments/1052021778697156678/1370860553671653427/car1.png"
-},
-{
-    name:"Falcon Prime Eques",
-    year:"2022",
-    price:"49.500",
-    speed:88,
-    accel:81,
-    braking:77,
-    image:"https://cdn.discordapp.com/attachments/1052021778697156678/1370860553671653427/car1.png"
-},
-{
-    name:"Bullhorn Buffalo",
-    year:"2019",
-    price:"35.000",
-    speed:82,
-    accel:73,
-    braking:69,
-    image:"https://cdn.discordapp.com/attachments/1052021778697156678/1370860553671653427/car1.png"
-},
-{
-    name:"Celestial Truck",
-    year:"2020",
-    price:"22.000",
-    speed:61,
-    accel:48,
-    braking:57,
-    image:"https://cdn.discordapp.com/attachments/1052021778697156678/1370860553671653427/car1.png"
-}
-];
-
-const grid = document.getElementById("vehicleGrid");
-
-function renderVehicles(list){
-    grid.innerHTML = "";
-
-    list.forEach(car => {
-        grid.innerHTML += `
-        <div class="card">
-            <img src="${car.image}" alt="${car.name}">
-            <div class="info">
-
-                <div class="vehicle-name">
-                    ${car.name}
-                </div>
-
-                <div class="year">
-                    ${car.year}
-                </div>
-
-                <div class="price">
-                    COP ${car.price}
-                </div>
-
-                <div class="stat">
-                    <div class="stat-top">
-                        <span>Velocidad</span>
-                        <span>${car.speed}</span>
+        <link href="logo.png" rel="shortcut icon" type="image/x-icon"/>
+        <link href="logo.png" rel="apple-touch-icon"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.0.1/chartjs-plugin-zoom.min.js"></script>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="branding">
+                <img class="logo" src="header.png">
+                <!-- <span class="text"></span> -->
+            </div>
+            <div class="pages" id="navbarPages">
+                <a href="index.html" style="color: transparent;">
+                    <div class="page">
+                        <span>Interactive Map</span>
                     </div>
-                    <div class="bar">
-                        <div class="fill" style="width:${car.speed}%"></div>
+                </a>
+                <a href="vehicle-stats.html" style="color: transparent;">
+                    <div class="page pageSelected">
+                        <span>Vehicle Stats</span>
+                        <div class="selectedBar"></div>
                     </div>
-                </div>
-
-                <div class="stat">
-                    <div class="stat-top">
-                        <span>Aceleración</span>
-                        <span>${car.accel}</span>
+                </a>
+                <a href="https://discord.gg/W57QVQK96P" target="_blank" rel="noopener noreferrer">
+                    <div class="profile">
+                        <img class="navImg" src="Images/discord.png">
                     </div>
-                    <div class="bar">
-                        <div class="fill" style="width:${car.accel}%"></div>
-                    </div>
-                </div>
-
-                <div class="stat">
-                    <div class="stat-top">
-                        <span>Frenado</span>
-                        <span>${car.braking}</span>
-                    </div>
-                    <div class="bar">
-                        <div class="fill" style="width:${car.braking}%"></div>
-                    </div>
-                </div>
-
-                <button onclick="buyVehicle('${car.name}', '${car.price}')">
-                    Adquirir
+                </a>
+            </div>
+            <div class="navbar-dropdown" style="display: none;" id="navbarDropdown">
+                <button class="navbar-dropdown-btn" onclick="toggleNavbarDropdown(event)">
+                    <span class="material-symbols-outlined">menu</span>
                 </button>
-
+                <div class="navbar-dropdown-content" id="navbarDropdownContent">
+                    <a href="index.html">Interactive Map</a>
+                    <a href="vehicle-stats.html">Vehicle Stats</a>
+                    <a href="https://discord.gg/W57QVQK96P" target="_blank" rel="noopener noreferrer">Discord</a>
+                </div>
             </div>
         </div>
-        `;
-    });
-}
-
-function buyVehicle(name, price){
-    alert(
-        `Comprar ${name}\n\nPrecio: COP ${price}\n\nLuego conectaremos esto a UnbelievaBoat`
-    );
-}
-
-document.getElementById("search")
-.addEventListener("input", function(){
-
-    const value = this.value.toLowerCase();
-
-    const filtered = vehicles.filter(car =>
-        car.name.toLowerCase().includes(value)
-    );
-
-    renderVehicles(filtered);
-});
-
-renderVehicles(vehicles);
-</script>
-
-</body>
+        <section id="main-section" style="position: fixed; width: calc(100% - 50px); height: 100%; top: 50px;">
+            <button class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
+                <span class="material-symbols-outlined" id="menu-left" translate="no">
+                    chevron_left
+                </span>
+                <span class="material-symbols-outlined" id="menu-right" style="display: none;" translate="no">
+                    chevron_right
+                </span>
+            </button>
+            <div class="sidebar" id="sidebar" style="height: calc(100% - 50px);">
+                <div class="selection-options" id="selection-side">
+                    <div class="list-title-nohover">
+                        <span class="list-text">Vehicle Selection</span>
+                    </div>
+                    <div style="display: none" id="insertSelectionVehicles"></div>
+                    <button class="vehicleBox" style="text-align: center;" onclick="toggleSelectionMenu()" id="addVehicleBox">
+                        <span class="material-symbols-outlined plusIcon" translate="no">
+                            add
+                        </span>
+                        <span class="vehicleAddText">Add Vehicle</span>
+                    </button>
+                    <div style="display: none; margin-top: 7px;" id="dataStats">
+                        <hr style="margin-top: 25px; margin-bottom: 25px;">
+                        <div class="VS-StatsContainer">
+                            <div class="VS-StatsDropdown" id="VS-StatsDropdown">
+                                <div class="VS-StatsOption" onclick="dropdownStatsOptions(); event.stopPropagation()">
+                                    <img id="statOptionIcon" src="Images/chart.svg">
+                                    <span id="statOptionTitle">Overview</span>
+                                </div>
+                                <div class="VS-StatsDropdownMenu" id="VS-StatsDropdownMenu" onclick="event.stopPropagation()">
+                                    <div class="VS-StatsOption" onclick="changeStats('overview')">
+                                        <img src="Images/chart.svg">
+                                        <span>Overview</span>
+                                    </div>
+                                    <div class="VS-StatsOption" onclick="changeStats('general')">
+                                        <img src="Images/car.svg">
+                                        <span>General</span>
+                                    </div>
+                                    <div class="VS-StatsOption" onclick="changeStats('acceleration')">
+                                        <img src="Images/accel.svg">
+                                        <span>Acceleration</span>
+                                    </div>
+                                    <div class="VS-StatsOption" onclick="changeStats('braking')">
+                                        <img src="Images/braking.svg">
+                                        <span>Braking</span>
+                                    </div>
+                                    <div class="VS-StatsOption" onclick="changeStats('reverse')">
+                                        <img src="Images/backward.svg">
+                                        <span>Reverse</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="VS-StatsOption" id="statSearch">
+                                <img src="Images/search.svg" style="vertical-align: middle;">
+                                <input id="statSearchInput" placeholder="Search for a stat..." onkeyup="statSearch(this)"></input>
+                            </div>
+                        </div>
+                        <a id="stat-overview">
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">Overall Score</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                            <div class="radarChartBox">
+                                <div class="VS-StatsDropdown" id="radarDropdown">
+                                    <div class="VS-StatsOption" onclick="dropdownRadarOptions(); event.stopPropagation()" id="radarOption">
+                                        <img id="radarOptionIcon">
+                                        <span id="radarOptionTitle"></span>
+                                    </div>
+                                    <div class="VS-StatsDropdownMenu" id="VS-RadarDropdownMenu" onclick="event.stopPropagation()">
+                                        <div class="VS-StatsOption" onclick="changeRadar(0)" id="radarOption1">
+                                            <img id="radarOptionIcon1">
+                                            <span id="radarOptionTitle1"></span>
+                                        </div>
+                                        <div class="VS-StatsOption" onclick="changeRadar(1)" id="radarOption2">
+                                            <img id="radarOptionIcon2">
+                                            <span id="radarOptionTitle2"></span>
+                                        </div>
+                                        <div class="VS-StatsOption" onclick="changeRadar(2)" id="radarOption3">
+                                            <img id="radarOptionIcon3">
+                                            <span id="radarOptionTitle3"></span>
+                                        </div>
+                                        <div class="VS-StatsOption" onclick="changeRadar(3)" id="radarOption4">
+                                            <img id="radarOptionIcon4">
+                                            <span id="radarOptionTitle4"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <canvas id="radarChart"></canvas>
+                            </div>
+                        </a>
+                        <a id="stat-acceleration" style="display: none;">
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">0 - 60 MPH</span>
+                                    <span class="statSubTitle">Lower is better</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">0 - 100 MPH</span>
+                                    <span class="statSubTitle">Lower is better</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">Top Speed</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                        </a>
+                        <a id="stat-braking" style="display: none;">
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">60 - 0 MPH</span>
+                                    <span class="statSubTitle">Lower is better</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">Deceleration Rate</span>
+                                    <span class="statSubTitle">Higher is better</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                        </a>
+                        <a id="stat-reverse" style="display: none;">
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">Reverse Acceleration</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">Top Reverse Speed</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                        </a>
+                        <a id="stat-general" style="display: none;">
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">Price</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">Value for Money</span>
+                                    <span class="statSubTitle">Higher is better</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">Fuel Capacity</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                            <div class="statBox">
+                                <div class="statHeader">
+                                    <span class="statTitle">Battery Capacity</span>
+                                </div>
+                                <div style="display: none;" class="insertHere"></div>
+                            </div>
+                        </a>
+                        <br>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <div class="info-text">
+                        <span>Version: 0.7.2</span>
+                        <br>
+                        <span>Last Updated: May 10, 2026</span>
+                        <br>
+                        <span><a class="link-click" onclick="section(1)">About</a> ▪ <a class="link-click" onclick="window.open('privacy-policy.html')">Privacy</a> ▪ <a class="link-click" onclick="window.open('terms-of-service.html')">Terms</a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="graphOptionsBox" id="graphOptionsBox">
+                <div class="graphOption GOSelected" onclick="switchMode('speed')" id="speedOption">
+                    <div class="material-symbols-outlined graphOptionIcon" translate="no">
+                        speed
+                    </div>
+                    <span class="graphOptionText">Speed</span>
+                </div>
+                <div class="graphOption" onclick="switchMode('distance')" id="distanceOption">
+                    <div class="material-symbols-outlined graphOptionIcon" translate="no">
+                        road
+                    </div>
+                    <span class="graphOptionText">Drag Race</span>
+                </div>
+                <!-- <div class="graphOption" onclick="switchMode('braking')" id="brakingOption">
+                    <div class="material-symbols-outlined graphOptionIcon" translate="no">
+                        arrow_cool_down
+                    </div>
+                    <span class="graphOptionText">Braking</span>
+                </div> -->
+                <div style="display: inline-table; height: 30px; width: 2px; background-color: #ccc; position: absolute; bottom: 5px; margin-left: 2.5px; margin-right: 2.5px; border-radius: 1px; vertical-align: middle;"></div>
+                <div class="graphOption" onclick="chart.resetZoom()" id="recenterOption" style="margin-left: 15px;">
+                    <div class="material-symbols-outlined graphOptionIcon" translate="no">
+                        recenter
+                    </div>
+                    <span class="graphOptionText">Recenter</span>
+                </div>
+                <div class="graphOption" onclick="embedToggle()" id="embedOption">
+                    <div class="material-symbols-outlined graphOptionIcon" translate="no">
+                        code
+                    </div>
+                    <span class="graphOptionText">Embed</span>
+                </div>
+            </div>
+            <div class="xAxisLabel" id="xAxis">
+                <span class="labelText" id="xAxisText">Time (sec)</span>
+            </div>
+            <div class="yAxisLabel" id="yAxis">
+                <span class="labelText" id="yAxisText">Speed (mph)</span>
+            </div>
+            <div id="graphBox">
+                <canvas class="graph" id="myChart"></canvas>
+            </div>
+            <div class="noteTextBox">
+                <span class="noteText" id="noteText"></span>
+            </div>
+            <a class="graphWatermark" id="graphWatermark" href="https://erlc-map.pages.dev/vehicle-stats">
+                <img class="graphWatermarkLogo" src="logo.png">
+            </a>
+        </section>
+        <section id="selectionMenu" style="display: none; overflow-y: auto; text-align: center;">
+            <div class="selectionMenuBox" id="selectionMenuBox">
+                <div class="vehicleSelectionOptionsBox" id="VSOptionsBox">
+                    <div class="vehicleSortBox">
+                        <select class="vehicleSortSelect" id="sort">
+                            <option value="price,low" selected>Price (low to high)</option>
+                            <option value="price,high">Price (high to low)</option>
+                            <option value="finalScore,high">Overall Score</option>
+                            <option value="accelScore,high">Acceleration Score</option>
+                            <option value="brakingScore,high">Braking Score</option>
+                            <option value="reverseScore,high">Reverse Score</option>
+                            <option value="value_for_money,high">Value for Money</option>
+                        </select>
+                    </div>
+                    <div class="filterWrapper">
+                        <div class="filterTitle">Price</div>
+                        <div class="filterDoubleRange">
+                            <div class="sliders_control">
+                                <input class="rangeSlider" id="fromSlider" type="range" value="0" min="0" max="1000000" step="10000"/>
+                                <input class="rangeSlider" id="toSlider" type="range" value="100000000" min="0" max="1000000" step="10000"/>
+                            </div>
+                            <div class="filterDRTextContainer">
+                                <span id="fromNum">$0</span>
+                                <span id="toNum" style="float: right;">$1M+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filterWrapper">
+                        <div class="filterTitle">Type</div>
+                        <div class="filterContainer">
+                            <div class="filterOption">
+                                <input class="filterCheckbox" type="checkbox" onclick="typeFilterUpd('Regular')">
+                                <span>Regular</span>
+                            </div>
+                            <div class="filterOption">
+                                <input class="filterCheckbox" type="checkbox" onclick="typeFilterUpd('Prestige')">
+                                <span>Prestige</span>
+                            </div>
+                            <div class="filterOption">
+                                <input class="filterCheckbox" type="checkbox" onclick="typeFilterUpd('Electric')">
+                                <span>Electric</span>
+                            </div>
+                            <div class="filterOption">
+                                <input class="filterCheckbox" type="checkbox" onclick="typeFilterUpd('Classic')">
+                                <span>Classic</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filterWrapper">
+                        <div class="filterTitle">Class</div>
+                        <div class="filterContainer">
+                            <div class="filterOption">
+                                <input class="filterCheckbox" type="checkbox" onclick="classFilterUpd('Car')">
+                                <span>Car</span>
+                            </div>
+                            <div class="filterOption">
+                                <input class="filterCheckbox" type="checkbox" onclick="classFilterUpd('Truck')">
+                                <span>Truck</span>
+                            </div>
+                            <div class="filterOption">
+                                <input class="filterCheckbox" type="checkbox" onclick="classFilterUpd('SUV')">
+                                <span>SUV</span>
+                            </div>
+                            <div class="filterOption">
+                                <input class="filterCheckbox" type="checkbox" onclick="classFilterUpd('Industrial')">
+                                <span>Industrial</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filterWrapper" style="max-height: 202px;">
+                        <div class="filterSearchContainer">
+                            <img src="Images/search.svg" class="filterIcon">
+                            <input id="brandSearchInput" placeholder="Search brands..." class="filterSearch" onkeyup="brandSearch()">
+                        </div>
+                        <div class="filterContainer" id="brandContainer">
+                            <div class="filterOption" id="filter_arrow">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Arrow')">
+                                <span>Arrow</span>
+                            </div>
+                            <div class="filterOption" id="filter_averon">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Averon')">
+                                <span>Averon</span>
+                            </div>
+                            <div class="filterOption" id="filter_bkm">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('BKM')">
+                                <span>BKM</span>
+                            </div>
+                            <div class="filterOption" id="filter_bullhorn">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Bullhorn')">
+                                <span>Bullhorn</span>
+                            </div>
+                            <div class="filterOption" id="filter_celestial">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Celestial')">
+                                <span>Celestial</span>
+                            </div>
+                            <div class="filterOption" id="filter_chevlon">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Chevlon')">
+                                <span>Chevlon</span>
+                            </div>
+                            <div class="filterOption" id="filter_chryslus">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Chryslus')">
+                                <span>Chryslus</span>
+                            </div>
+                            <div class="filterOption" id="filter_elysion">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Elysion')">
+                                <span>Elysion</span>
+                            </div>
+                            <div class="filterOption" id="filter_falcon">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Falcon')">
+                                <span>Falcon</span>
+                            </div>
+                            <div class="filterOption" id="filter_ferdinand">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Ferdinand')">
+                                <span>Ferdinand</span>
+                            </div>
+                            <div class="filterOption" id="filter_kovac">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Kovac')">
+                                <span>Kovac</span>
+                            </div>
+                            <div class="filterOption" id="filter_leland">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Leland')">
+                                <span>Leland</span>
+                            </div>
+                            <div class="filterOption" id="filter_navara">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Navara')">
+                                <span>Navara</span>
+                            </div>
+                            <div class="filterOption" id="filter_overland">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Overland')">
+                                <span>Overland</span>
+                            </div>
+                            <div class="filterOption" id="filter_sentinel">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Sentinel')">
+                                <span>Sentinel</span>
+                            </div>
+                            <div class="filterOption" id="filter_strugatti">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Strugatti')">
+                                <span>Strugatti</span>
+                            </div>
+                            <div class="filterOption" id="filter_stuttgart">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Stuttgart')">
+                                <span>Stuttgart</span>
+                            </div>
+                            <div class="filterOption" id="filter_sumo">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Sumo')">
+                                <span>Sumo</span>
+                            </div>
+                            <div class="filterOption" id="filter_surrey">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Surrey')">
+                                <span>Surrey</span>
+                            </div>
+                            <div class="filterOption" id="filter_takeo">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Takeo')">
+                                <span>Takeo</span>
+                            </div>
+                            <div class="filterOption" id="filter_terrain">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Terrain')">
+                                <span>Terrain</span>
+                            </div>
+                            <div class="filterOption" id="filter_vellfire">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Vellfire')">
+                                <span>Vellfire</span>
+                            </div>
+                            <div class="filterOption" id="filter_other">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="brandFilterUpd('Other')">
+                                <span>Other</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filterWrapper">
+                        <div class="filterTitle">Other</div>
+                        <div class="filterContainer">
+                            <div class="filterOption" id="filter_interior">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="otherFilterUpd('Interior')">
+                                <span>Interior</span>
+                            </div>
+                            <!-- <div class="filterOption" id="filter_convertible">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="otherFilterUpd('Convertible')">
+                                <span>Convertible</span>
+                            </div> -->
+                            <hr>
+                            <div class="filterOption" id="filter_added">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="otherFilterUpd('Added')">
+                                <span style="-webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: #29d70a; paint-order: stroke fill;">Added Recently</span>
+                            </div>
+                            <div class="filterOption" id="filter_updated">
+                                <input class="filterCheckbox" name="Chevlon" type="checkbox" onclick="otherFilterUpd('Updated')">
+                                <span style="-webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: orange; paint-order: stroke fill;">Updated Recently</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="vehicleSelectionBox" id="vehicleSelectionBox">
+                    <div class="vehicleOptionsBar" id="vehicleOptionsBar">
+                        <a class="vehicleTeamSelector">
+                            <select class="vehicleTeamSelect" id="vehicleTeamSelect">
+                                <option value="" selected>Civilian</option>
+                                <option value="LEO">Law Enforcement</option>
+                                <option value="exclusive">Exclusives</option>
+                            </select>
+                        </a>
+                        <div class="vehicleOptionsBarLine"></div>
+                        <div class="vehicleSearchBox">
+                            <input placeholder="Search vehicles..." class="vehicleSearch" id="vehicleSearch" onkeyup="search()">
+                        </div>
+                    </div>
+                    <button class="closeSelectionMenu" onclick="toggleSelectionMenu()">
+                        <img style="width: 100%; height: 100%;" src="Images/close.svg">
+                    </button>
+                    <div style="display: none" id="insertSelectionHere"></div>
+                </div>
+            </div>
+            <button class="toggleFilterButton" onclick="toggleFilter()" id="toggleFilter">
+                <img style="width: 100%; height: 100%;" src="Images/filter.svg">
+            </button>
+        </section>
+        <section id="embedSection" style="background-color: #2c2c2c50; display: none;" onclick="embedToggle()">
+            <div class="embedBox" onclick="event.stopPropagation()">
+                <span style="font-size: 24px;">Embed Graph</span>
+                <br>
+                <span style="font-size: 14px; font-weight: 400;">Embed this graph anywhere on the internet. No credit is needed.</span>
+                <br><br>
+                <div class="embedOptions">
+                    <span>Graph Only</span>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="fullscreenCheckbox" onclick="updateEmbed()" checked>
+                        <label for="fullscreenCheckbox"></label>
+                    </div>
+                </div>
+                <div class="embedCode">
+                    <code id="embedCodeText">&lt;iframe src="https://erlc-map.pages.dev/vehicle-stats.html" width="600" height="400"&gt;&lt;/iframe&gt;</code>
+                    <br><br>
+                    <button class="copyButton" onclick="copyEmbedCode()" id="copyText">Copy</button>
+                </div>
+            </div>
+        </section>
+        <section id="about" style="display: none; text-align: center; z-index: 11;">
+            <br><br><br>
+            <span class="about-text">This website is not affiliated with Emergency Response: Liberty County or Police Roleplay Community, our content is not official or endorsed in any way. </span>
+            <br><br>
+            <span class="about-text">Developed by Syce Gaming (@sycegaming on <a class="link-click highlight" href="https://discord.gg/W57QVQK96P">Discord</a>).</span>
+            <br><br><br><br>
+            <span class="about-text"><a class="link-click" onclick="section(0)">Back</a></span>
+        </section>
+        <script src="vehicle-data.js" type="text/javascript"></script>
+        <script src="vehicle-stats.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
 </html>
