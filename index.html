@@ -1,2061 +1,281 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Colombia RP — Concesionario ER:LC</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<title>Colombia RP Vehicles</title>
 
-<!-- ============================================================
-     COLOMBIA RP — MARKETPLACE DE VEHÍCULOS ER:LC
-     Versión: 1.0.0
-     Diseño: Gaming Dark Premium + Glassmorphism + Neon Accents
-     ============================================================ -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ══════════════════════════════════════════
-   VARIABLES GLOBALES
-══════════════════════════════════════════ */
-:root {
-  /* Paleta principal */
-  --bg-void:        #04060d;
-  --bg-base:        #070b16;
-  --bg-surface:     #0c1220;
-  --bg-card:        #0f1729;
-  --bg-card-hover:  #131e35;
-  --bg-glass:       rgba(12,18,32,0.75);
-  --bg-input:       rgba(255,255,255,0.04);
-  --bg-modal:       rgba(4,6,13,0.97);
-
-  /* Bordes */
-  --border-dim:     rgba(255,255,255,0.05);
-  --border-soft:    rgba(255,255,255,0.09);
-  --border-blue:    rgba(56,139,253,0.35);
-  --border-gold:    rgba(245,185,50,0.3);
-
-  /* Colores de acento */
-  --blue:           #388bfd;
-  --blue-bright:    #58a6ff;
-  --blue-glow:      rgba(56,139,253,0.22);
-  --blue-glow-lg:   rgba(56,139,253,0.12);
-  --gold:           #f5b932;
-  --gold-glow:      rgba(245,185,50,0.18);
-  --cyan:           #39d0d8;
-  --purple:         #a371f7;
-  --green:          #3fb950;
-  --red:            #f85149;
-  --orange:         #f78166;
-
-  /* Texto */
-  --text-white:     #f0f6fc;
-  --text-primary:   #cdd9e5;
-  --text-secondary: #768390;
-  --text-muted:     #444c56;
-
-  /* Categorías */
-  --cat-civil:      #388bfd;
-  --cat-police:     #1f6feb;
-  --cat-sheriff:    #d29922;
-  --cat-dot:        #f78166;
-  --cat-fire:       #f85149;
-  --cat-premium:    #a371f7;
-  --cat-exotic:     #db61a2;
-  --cat-utility:    #6e7681;
-
-  /* Radios y sombras */
-  --r-sm:  8px;
-  --r-md:  14px;
-  --r-lg:  20px;
-  --r-xl:  28px;
-  --r-pill: 999px;
-
-  --shadow-card:    0 4px 30px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.4);
-  --shadow-glow:    0 0 40px rgba(56,139,253,0.12);
-  --shadow-modal:   0 25px 80px rgba(0,0,0,0.7);
-
-  /* Transiciones */
-  --ease:           cubic-bezier(0.4,0,0.2,1);
-  --t-fast:         0.15s;
-  --t-med:          0.25s;
-  --t-slow:         0.4s;
-}
-
-/* ══════════════════════════════════════════
-   RESET & BASE
-══════════════════════════════════════════ */
-*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-html { scroll-behavior:smooth; font-size:16px; }
-body {
-  font-family:'Outfit',sans-serif;
-  background:var(--bg-void);
-  color:var(--text-primary);
-  min-height:100vh;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-}
-a { text-decoration:none; color:inherit; }
-button { cursor:pointer; border:none; background:none; font-family:inherit; color:inherit; }
-input, select { font-family:inherit; }
-img { display:block; max-width:100%; }
-ul { list-style:none; }
-
-/* Scrollbar */
-::-webkit-scrollbar { width:5px; height:5px; }
-::-webkit-scrollbar-track { background:var(--bg-void); }
-::-webkit-scrollbar-thumb { background:rgba(56,139,253,0.3); border-radius:99px; }
-::-webkit-scrollbar-thumb:hover { background:rgba(56,139,253,0.55); }
-
-/* ══════════════════════════════════════════
-   FONDO AMBIENT ANIMADO
-══════════════════════════════════════════ */
-.ambient {
-  position:fixed; inset:0; z-index:0;
-  overflow:hidden; pointer-events:none;
-}
-.ambient-blob {
-  position:absolute; border-radius:50%;
-  filter:blur(120px); will-change:transform;
-}
-.blob-1 {
-  width:700px; height:700px; top:-200px; left:-150px;
-  background:radial-gradient(circle, rgba(56,139,253,0.16), transparent 70%);
-  animation:blobDrift 18s ease-in-out infinite alternate;
-}
-.blob-2 {
-  width:600px; height:600px; bottom:-150px; right:-100px;
-  background:radial-gradient(circle, rgba(163,113,247,0.12), transparent 70%);
-  animation:blobDrift 22s ease-in-out infinite alternate-reverse;
-}
-.blob-3 {
-  width:350px; height:350px; top:45%; left:42%;
-  background:radial-gradient(circle, rgba(245,185,50,0.07), transparent 70%);
-  animation:blobDrift 28s ease-in-out infinite alternate;
-}
-@keyframes blobDrift {
-  0%   { transform:translate(0,0) scale(1); }
-  50%  { transform:translate(40px,25px) scale(1.06); }
-  100% { transform:translate(-20px,45px) scale(0.95); }
-}
-
-/* Grid de puntos de fondo */
-.ambient::before {
-  content:'';
-  position:absolute; inset:0;
-  background-image:radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size:36px 36px;
-  mask-image:radial-gradient(ellipse 90% 80% at 50% 50%, black, transparent);
-}
-
-/* ══════════════════════════════════════════
-   LOADING SCREEN
-══════════════════════════════════════════ */
-#loading-screen {
-  position:fixed; inset:0; z-index:9999;
-  background:var(--bg-void);
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:32px;
-  transition:opacity 0.6s var(--ease), visibility 0.6s;
-}
-#loading-screen.oculto { opacity:0; visibility:hidden; pointer-events:none; }
-
-.loader-brand {
-  display:flex; flex-direction:column; align-items:center; gap:12px;
-}
-.loader-logo-icon {
-  width:72px; height:72px; border-radius:22px;
-  background:linear-gradient(135deg, #388bfd 0%, #a371f7 100%);
-  display:flex; align-items:center; justify-content:center;
-  font-size:2rem;
-  box-shadow:0 0 40px rgba(56,139,253,0.45), 0 0 80px rgba(56,139,253,0.15);
-  animation:logoGlow 2.5s ease-in-out infinite alternate;
-}
-@keyframes logoGlow {
-  from { box-shadow:0 0 40px rgba(56,139,253,0.45), 0 0 80px rgba(56,139,253,0.15); }
-  to   { box-shadow:0 0 60px rgba(56,139,253,0.7),  0 0 100px rgba(163,113,247,0.25); }
-}
-.loader-brand-name {
-  font-family:'Orbitron',monospace;
-  font-weight:700; font-size:1.4rem;
-  letter-spacing:0.15em;
-  background:linear-gradient(135deg,#f0f6fc,#768390);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.loader-brand-sub {
-  font-size:0.78rem; color:var(--text-secondary);
-  letter-spacing:0.2em; text-transform:uppercase;
-}
-
-.loader-progress-wrap {
-  display:flex; flex-direction:column; align-items:center; gap:10px;
-}
-.loader-bar-track {
-  width:280px; height:2px;
-  background:rgba(255,255,255,0.06);
-  border-radius:99px; overflow:hidden;
-}
-.loader-bar-fill {
-  height:100%; width:0%;
-  background:linear-gradient(90deg, #388bfd, #a371f7, #f5b932);
-  border-radius:99px;
-  animation:progressFill 2.2s cubic-bezier(0.4,0,0.2,1) forwards;
-  box-shadow:0 0 10px rgba(56,139,253,0.5);
-}
-@keyframes progressFill { to { width:100%; } }
-
-.loader-status {
-  font-size:0.72rem; color:var(--text-muted);
-  letter-spacing:0.12em; text-transform:uppercase;
-  animation:statusCycle 2.2s steps(3) forwards;
-}
-
-/* ══════════════════════════════════════════
-   NAVBAR
-══════════════════════════════════════════ */
-#navbar {
-  position:sticky; top:0; z-index:200;
-  background:rgba(7,11,22,0.88);
-  backdrop-filter:blur(24px) saturate(180%);
-  border-bottom:1px solid var(--border-dim);
-  height:62px;
-  display:flex; align-items:center;
-  padding:0 24px; gap:16px;
-}
-
-/* Línea animada en el navbar */
-#navbar::after {
-  content:'';
-  position:absolute; bottom:-1px; left:0;
-  width:100%; height:1px;
-  background:linear-gradient(90deg, transparent, var(--blue), var(--purple), transparent);
-  opacity:0.4;
-}
-
-.nav-logo {
-  display:flex; align-items:center; gap:10px;
-  text-decoration:none;
-}
-.nav-logo-mark {
-  width:34px; height:34px; border-radius:10px;
-  background:linear-gradient(135deg,#388bfd,#a371f7);
-  display:flex; align-items:center; justify-content:center;
-  font-size:1rem;
-  box-shadow:0 0 16px rgba(56,139,253,0.35);
-  flex-shrink:0;
-}
-.nav-logo-text {
-  display:flex; flex-direction:column; line-height:1.1;
-}
-.nav-logo-title {
-  font-family:'Orbitron',monospace;
-  font-weight:700; font-size:0.9rem;
-  letter-spacing:0.08em;
-  color:var(--text-white);
-}
-.nav-logo-sub {
-  font-size:0.62rem; color:var(--text-secondary);
-  letter-spacing:0.15em; text-transform:uppercase;
-}
-
-.nav-divider { width:1px; height:28px; background:var(--border-dim); flex-shrink:0; }
-.nav-spacer  { flex:1; }
-
-.nav-tag {
-  padding:5px 14px;
-  background:rgba(56,139,253,0.08);
-  border:1px solid rgba(56,139,253,0.18);
-  border-radius:var(--r-pill);
-  font-size:0.7rem; font-weight:600;
-  color:var(--blue-bright);
-  letter-spacing:0.1em; text-transform:uppercase;
-  white-space:nowrap;
-}
-
-/* Usuario logueado */
-.nav-user-panel {
-  display:flex; align-items:center; gap:10px;
-  background:var(--bg-glass);
-  border:1px solid var(--border-soft);
-  border-radius:var(--r-pill);
-  padding:5px 14px 5px 6px;
-  cursor:pointer;
-  transition:border-color var(--t-med) var(--ease), background var(--t-med) var(--ease);
-}
-.nav-user-panel:hover { border-color:var(--border-blue); background:rgba(56,139,253,0.06); }
-
-.nav-avatar {
-  width:28px; height:28px; border-radius:50%;
-  background:linear-gradient(135deg,#5865F2,#388bfd);
-  display:flex; align-items:center; justify-content:center;
-  font-size:0.72rem; font-weight:700; color:#fff;
-  flex-shrink:0;
-}
-.nav-username { font-size:0.8rem; font-weight:500; color:var(--text-primary); }
-.nav-balance-chip {
-  font-size:0.7rem; font-weight:700;
-  color:var(--gold);
-  background:rgba(245,185,50,0.1);
-  border:1px solid rgba(245,185,50,0.2);
-  border-radius:var(--r-pill); padding:3px 10px;
-  white-space:nowrap;
-}
-
-/* Botón login */
-.btn-discord-login {
-  display:flex; align-items:center; gap:8px;
-  background:linear-gradient(135deg,#5865F2 0%,#388bfd 100%);
-  color:#fff; font-size:0.8rem; font-weight:600;
-  padding:8px 18px; border-radius:var(--r-pill);
-  transition:opacity var(--t-fast), transform var(--t-fast);
-  box-shadow:0 4px 18px rgba(88,101,242,0.35);
-  white-space:nowrap;
-}
-.btn-discord-login:hover { opacity:0.88; transform:translateY(-1px); }
-
-/* ══════════════════════════════════════════
-   HERO SECTION
-══════════════════════════════════════════ */
-.hero-section {
-  position:relative; z-index:1;
-  padding:56px 24px 36px;
-  text-align:center;
-  max-width:860px; margin:0 auto;
-}
-.hero-kicker {
-  display:inline-flex; align-items:center; gap:8px;
-  background:rgba(56,139,253,0.07);
-  border:1px solid rgba(56,139,253,0.2);
-  border-radius:var(--r-pill);
-  padding:6px 18px;
-  font-size:0.7rem; font-weight:600;
-  color:var(--blue-bright);
-  letter-spacing:0.14em; text-transform:uppercase;
-  margin-bottom:22px;
-}
-.kicker-dot {
-  width:6px; height:6px; border-radius:50%;
-  background:var(--blue);
-  box-shadow:0 0 8px var(--blue);
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
-
-.hero-section h1 {
-  font-family:'Orbitron',monospace;
-  font-weight:900;
-  font-size:clamp(1.8rem,4.5vw,3.2rem);
-  line-height:1.12; letter-spacing:-0.01em;
-  margin-bottom:16px;
-  color:var(--text-white);
-}
-.hero-section h1 .accent-blue {
-  background:linear-gradient(135deg,#388bfd,#58a6ff);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.hero-section h1 .accent-gold {
-  background:linear-gradient(135deg,#f5b932,#f78166);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-
-.hero-desc {
-  font-size:0.95rem; color:var(--text-secondary);
-  max-width:520px; margin:0 auto 32px;
-  line-height:1.75;
-}
-
-.hero-stats-row {
-  display:flex; align-items:center; justify-content:center;
-  gap:16px; flex-wrap:wrap;
-}
-.hero-stat-card {
-  background:var(--bg-glass);
-  border:1px solid var(--border-soft);
-  border-radius:var(--r-md);
-  padding:14px 22px;
-  backdrop-filter:blur(16px);
-  text-align:center;
-  transition:border-color var(--t-med);
-}
-.hero-stat-card:hover { border-color:var(--border-blue); }
-.hero-stat-val {
-  font-family:'Orbitron',monospace;
-  font-weight:700; font-size:1.4rem;
-  color:var(--blue-bright);
-  line-height:1;
-}
-.hero-stat-label {
-  font-size:0.68rem; color:var(--text-muted);
-  letter-spacing:0.1em; text-transform:uppercase;
-  margin-top:4px;
-}
-
-/* ══════════════════════════════════════════
-   BARRA DE HERRAMIENTAS
-══════════════════════════════════════════ */
-.toolbar {
-  position:relative; z-index:10;
-  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
-  padding:0 24px; max-width:1700px; margin:0 auto 20px;
-}
-
-/* Búsqueda */
-.search-container {
-  position:relative; flex:1; min-width:200px; max-width:360px;
-}
-.search-icon-svg {
-  position:absolute; left:13px; top:50%; transform:translateY(-50%);
-  width:16px; height:16px; color:var(--text-muted);
-  pointer-events:none;
-}
-#search-input {
-  width:100%;
-  background:var(--bg-glass);
-  border:1px solid var(--border-soft);
-  border-radius:var(--r-md);
-  padding:11px 14px 11px 42px;
-  color:var(--text-primary); font-size:0.875rem;
-  outline:none;
-  backdrop-filter:blur(12px);
-  transition:border-color var(--t-med) var(--ease),
-             box-shadow var(--t-med) var(--ease);
-}
-#search-input::placeholder { color:var(--text-muted); }
-#search-input:focus {
-  border-color:var(--border-blue);
-  box-shadow:0 0 0 3px var(--blue-glow);
-}
-
-/* Selector ordenamiento */
-.sort-select {
-  background:var(--bg-glass);
-  border:1px solid var(--border-soft);
-  border-radius:var(--r-md);
-  padding:11px 36px 11px 14px;
-  color:var(--text-secondary); font-size:0.83rem;
-  outline:none; cursor:pointer;
-  backdrop-filter:blur(12px);
-  appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23768390' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:right 8px center; background-size:20px;
-  transition:border-color var(--t-med);
-}
-.sort-select option { background:var(--bg-card); }
-.sort-select:focus { border-color:var(--border-blue); }
-
-/* Contador */
-.results-count {
-  font-size:0.8rem; color:var(--text-muted);
-  white-space:nowrap; margin-left:auto;
-}
-.results-count strong { color:var(--text-primary); }
-
-/* ══════════════════════════════════════════
-   TABS DE CATEGORÍAS
-══════════════════════════════════════════ */
-.categories-wrap {
-  position:relative; z-index:10;
-  overflow-x:auto; scrollbar-width:none;
-  padding:0 24px 12px;
-  max-width:1700px; margin:0 auto 28px;
-}
-.categories-wrap::-webkit-scrollbar { display:none; }
-
-.categories-tabs {
-  display:flex; align-items:center; gap:8px;
-  width:max-content;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,sans-serif;
 }
 
-.cat-btn {
-  display:flex; align-items:center; gap:7px;
-  padding:9px 18px;
-  border-radius:var(--r-pill);
-  font-size:0.8rem; font-weight:600;
-  border:1px solid var(--border-soft);
-  color:var(--text-secondary);
-  background:var(--bg-glass);
-  backdrop-filter:blur(10px);
-  white-space:nowrap;
-  transition:all var(--t-med) var(--ease);
+body{
+    background:#0f1115;
+    color:#fff;
 }
-.cat-btn .cat-pip {
-  width:7px; height:7px; border-radius:50%;
-  opacity:0.5; transition:opacity var(--t-med);
-  flex-shrink:0;
-}
-.cat-btn:hover { color:var(--text-primary); border-color:var(--border-soft); background:rgba(255,255,255,0.05); }
-.cat-btn.activo {
-  color:#fff; border-color:transparent;
-  box-shadow:0 4px 20px rgba(0,0,0,0.35);
-}
-.cat-btn.activo .cat-pip { opacity:1; }
-
-/* Colores activos por categoría */
-.cat-btn[data-cat="all"].activo     { background:linear-gradient(135deg,#388bfd,#a371f7); }
-.cat-btn[data-cat="Civiles"].activo { background:linear-gradient(135deg,#388bfd,#39d0d8); }
-.cat-btn[data-cat="Police"].activo  { background:linear-gradient(135deg,#1f6feb,#388bfd); }
-.cat-btn[data-cat="Sheriff"].activo { background:linear-gradient(135deg,#9e6a03,#d29922); }
-.cat-btn[data-cat="DOT"].activo     { background:linear-gradient(135deg,#da3633,#f78166); }
-.cat-btn[data-cat="Fire & Rescue"].activo { background:linear-gradient(135deg,#b91c1c,#f85149); }
-.cat-btn[data-cat="Premium"].activo { background:linear-gradient(135deg,#6e40c9,#a371f7); }
-.cat-btn[data-cat="Exotic"].activo  { background:linear-gradient(135deg,#a21caf,#db61a2); }
-.cat-btn[data-cat="Utility"].activo { background:linear-gradient(135deg,#444c56,#6e7681); }
-
-/* ══════════════════════════════════════════
-   GRILLA DE VEHÍCULOS
-══════════════════════════════════════════ */
-.grid-section {
-  position:relative; z-index:1;
-  padding:0 24px 80px;
-  max-width:1700px; margin:0 auto;
-}
-#vehicle-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(285px,1fr));
-  gap:18px;
-}
-
-/* ── Skeleton ── */
-.skeleton-card {
-  background:var(--bg-card);
-  border:1px solid var(--border-dim);
-  border-radius:var(--r-xl);
-  overflow:hidden; height:330px;
-}
-.skeleton-img  { width:100%; height:165px; background:var(--bg-surface); animation:shimmer 1.6s ease-in-out infinite; }
-.skeleton-body { padding:18px; display:flex; flex-direction:column; gap:10px; }
-.skeleton-line {
-  height:11px; border-radius:4px; background:var(--bg-surface);
-  animation:shimmer 1.6s ease-in-out infinite;
-}
-.skeleton-line.w60 { width:60%; }
-.skeleton-line.w40 { width:40%; }
-.skeleton-line.w80 { width:80%; }
-.skeleton-line.h16 { height:16px; }
-@keyframes shimmer {
-  0%,100% { opacity:0.5; }
-  50%      { opacity:1; }
-}
-
-/* ── Tarjeta de vehículo ── */
-.vehicle-card {
-  position:relative;
-  background:var(--bg-card);
-  border:1px solid var(--border-dim);
-  border-radius:var(--r-xl);
-  overflow:hidden;
-  display:flex; flex-direction:column;
-  transition:transform var(--t-med) var(--ease),
-             border-color var(--t-med) var(--ease),
-             box-shadow var(--t-med) var(--ease);
-  cursor:pointer;
-  animation:cardReveal 0.4s var(--ease) both;
-}
-.vehicle-card:hover {
-  transform:translateY(-6px);
-  border-color:rgba(255,255,255,0.1);
-  box-shadow:var(--shadow-card), var(--shadow-glow);
-}
-@keyframes cardReveal {
-  from { opacity:0; transform:translateY(18px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-
-/* Chip de categoría */
-.card-cat-badge {
-  position:absolute; top:14px; left:14px; z-index:3;
-  font-size:0.62rem; font-weight:700;
-  letter-spacing:0.12em; text-transform:uppercase;
-  padding:4px 11px; border-radius:var(--r-pill);
-  color:#fff; backdrop-filter:blur(8px);
-}
-
-/* Imagen */
-.card-img-wrap {
-  position:relative; width:100%; height:168px;
-  display:flex; align-items:center; justify-content:center;
-  overflow:hidden;
-}
-.card-img-bg {
-  position:absolute; inset:0;
-  background:linear-gradient(135deg, rgba(56,139,253,0.07), rgba(163,113,247,0.05));
-  transition:opacity var(--t-med);
-}
-.vehicle-card:hover .card-img-bg { opacity:1.5; }
-
-.card-img-wrap::after {
-  content:''; position:absolute; bottom:0; left:0; right:0; height:55%;
-  background:linear-gradient(to bottom, transparent, var(--bg-card));
-  pointer-events:none; z-index:1;
-}
-.card-img {
-  position:relative; z-index:0;
-  width:88%; height:88%; object-fit:contain;
-  transition:transform var(--t-slow) var(--ease),
-             filter var(--t-med) var(--ease);
-  filter:drop-shadow(0 8px 20px rgba(0,0,0,0.5));
-}
-.vehicle-card:hover .card-img {
-  transform:scale(1.06) translateY(-4px);
-  filter:drop-shadow(0 16px 32px rgba(56,139,253,0.25));
-}
-
-/* Placeholder cuando no hay imagen */
-.card-img-placeholder {
-  width:88px; height:88px; border-radius:18px;
-  background:var(--bg-surface);
-  border:1px solid var(--border-soft);
-  display:flex; align-items:center; justify-content:center;
-  font-size:2.2rem;
-  color:var(--text-muted);
-  position:relative; z-index:0;
-}
-
-/* Cuerpo de la tarjeta */
-.card-body {
-  padding:16px 18px 18px;
-  display:flex; flex-direction:column; gap:14px;
-  flex:1;
-}
-
-.card-brand {
-  font-size:0.65rem; font-weight:600;
-  letter-spacing:0.12em; text-transform:uppercase;
-  color:var(--text-muted);
-}
-
-.card-name {
-  font-family:'Orbitron',monospace;
-  font-weight:700; font-size:0.95rem;
-  color:var(--text-white);
-  line-height:1.25;
-  letter-spacing:0.02em;
-  margin-top:2px;
-}
-
-/* Mini stats */
-.card-stats {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-.stat-item {
-  background:var(--bg-surface);
-  border:1px solid var(--border-dim);
-  border-radius:var(--r-sm);
-  padding:8px 10px;
-}
-.stat-label {
-  font-size:0.6rem; font-weight:600;
-  letter-spacing:0.1em; text-transform:uppercase;
-  color:var(--text-muted); margin-bottom:3px;
-}
-.stat-val {
-  font-family:'Orbitron',monospace;
-  font-weight:600; font-size:0.78rem;
-  color:var(--text-primary);
-}
-
-/* Barra de velocidad */
-.speed-bar-wrap { display:flex; flex-direction:column; gap:4px; }
-.speed-bar-label {
-  display:flex; justify-content:space-between;
-  font-size:0.62rem; color:var(--text-muted);
-}
-.speed-bar-track {
-  height:3px; background:var(--bg-surface); border-radius:99px; overflow:hidden;
-}
-.speed-bar-fill {
-  height:100%; border-radius:99px;
-  background:linear-gradient(90deg,#388bfd,#58a6ff);
-  box-shadow:0 0 6px rgba(56,139,253,0.4);
-  transition:width 0.8s var(--ease);
-}
-
-/* Footer de tarjeta */
-.card-footer {
-  display:flex; align-items:center; justify-content:space-between;
-  padding-top:10px;
-  border-top:1px solid var(--border-dim);
-}
-.card-price {
-  display:flex; flex-direction:column;
-}
-.price-label { font-size:0.6rem; color:var(--text-muted); letter-spacing:0.1em; text-transform:uppercase; }
-.price-amount {
-  font-family:'Orbitron',monospace;
-  font-weight:700; font-size:1rem;
-  color:var(--gold);
-  line-height:1.2;
-}
-
-/* Botón adquirir */
-.btn-adquirir {
-  display:flex; align-items:center; gap:7px;
-  background:linear-gradient(135deg, rgba(56,139,253,0.15), rgba(163,113,247,0.1));
-  border:1px solid rgba(56,139,253,0.3);
-  border-radius:var(--r-md);
-  padding:9px 16px;
-  font-size:0.78rem; font-weight:600;
-  color:var(--blue-bright);
-  transition:all var(--t-med) var(--ease);
-}
-.btn-adquirir:hover {
-  background:linear-gradient(135deg, rgba(56,139,253,0.28), rgba(163,113,247,0.2));
-  border-color:rgba(56,139,253,0.55);
-  box-shadow:0 4px 18px rgba(56,139,253,0.25);
-  transform:scale(1.03);
-  color:#fff;
-}
-
-/* ── Empty state ── */
-.empty-state {
-  grid-column:1/-1;
-  display:flex; flex-direction:column; align-items:center;
-  padding:80px 24px; gap:16px; text-align:center;
-}
-.empty-icon { font-size:3.5rem; filter:grayscale(0.5); }
-.empty-title { font-family:'Orbitron',monospace; font-weight:700; font-size:1.1rem; color:var(--text-primary); }
-.empty-desc  { font-size:0.85rem; color:var(--text-muted); max-width:320px; }
-
-/* ══════════════════════════════════════════
-   MODAL DE COMPRA
-══════════════════════════════════════════ */
-.modal-overlay {
-  position:fixed; inset:0; z-index:500;
-  background:rgba(4,6,13,0.9);
-  backdrop-filter:blur(8px);
-  display:flex; align-items:center; justify-content:center;
-  padding:16px;
-  opacity:0; visibility:hidden;
-  transition:opacity var(--t-med) var(--ease),
-             visibility var(--t-med) var(--ease);
-}
-.modal-overlay.abierto { opacity:1; visibility:visible; }
 
-.modal-panel {
-  background:var(--bg-card);
-  border:1px solid var(--border-soft);
-  border-radius:var(--r-xl);
-  width:100%; max-width:580px;
-  max-height:90vh; overflow-y:auto;
-  scrollbar-width:thin;
-  box-shadow:var(--shadow-modal);
-  transform:scale(0.94) translateY(20px);
-  transition:transform var(--t-med) var(--ease);
-  position:relative;
+header{
+    background:#161a22;
+    padding:20px;
+    border-bottom:1px solid #262c38;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
-.modal-overlay.abierto .modal-panel { transform:scale(1) translateY(0); }
 
-/* Línea decorativa superior del modal */
-.modal-top-bar {
-  height:3px; width:100%;
-  background:linear-gradient(90deg,#388bfd,#a371f7,#f5b932);
-  border-radius:var(--r-xl) var(--r-xl) 0 0;
-  flex-shrink:0;
+.logo{
+    font-size:28px;
+    font-weight:700;
 }
 
-/* Cabecera del modal */
-.modal-header {
-  position:relative;
-  padding:24px 24px 0;
-  display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+.search-box{
+    margin-top:15px;
 }
-.modal-close-btn {
-  width:32px; height:32px; border-radius:var(--r-sm);
-  background:var(--bg-surface); border:1px solid var(--border-soft);
-  display:flex; align-items:center; justify-content:center;
-  color:var(--text-secondary); font-size:1rem;
-  flex-shrink:0;
-  transition:background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
-}
-.modal-close-btn:hover { background:rgba(248,81,73,0.1); border-color:rgba(248,81,73,0.3); color:var(--red); }
-
-/* Imagen del modal */
-.modal-img-section {
-  padding:20px 24px;
-  display:flex; justify-content:center;
-}
-.modal-img-wrap {
-  width:100%; max-width:340px; height:180px;
-  background:linear-gradient(135deg,rgba(56,139,253,0.06),rgba(163,113,247,0.04));
-  border:1px solid var(--border-soft);
-  border-radius:var(--r-lg);
-  display:flex; align-items:center; justify-content:center; overflow:hidden;
-}
-.modal-img {
-  width:90%; height:90%; object-fit:contain;
-  filter:drop-shadow(0 8px 24px rgba(56,139,253,0.2));
-}
-.modal-img-placeholder {
-  font-size:4rem; color:var(--text-muted);
-}
-
-/* Contenido del modal */
-.modal-content { padding:0 24px 24px; display:flex; flex-direction:column; gap:20px; }
-
-.modal-title {
-  font-family:'Orbitron',monospace;
-  font-weight:900; font-size:1.3rem;
-  color:var(--text-white); letter-spacing:0.02em;
-}
-.modal-brand { font-size:0.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.12em; margin-top:3px; }
 
-.modal-cat-badge {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:5px 14px; border-radius:var(--r-pill);
-  font-size:0.68rem; font-weight:700;
-  letter-spacing:0.1em; text-transform:uppercase;
-  color:#fff; margin-top:8px; align-self:flex-start;
+input{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    background:#202631;
+    color:white;
+    font-size:16px;
 }
 
-/* Grid de stats del modal */
-.modal-stats-grid {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-.modal-stat-item {
-  background:var(--bg-surface);
-  border:1px solid var(--border-dim);
-  border-radius:var(--r-md); padding:12px 14px;
-}
-.modal-stat-label {
-  font-size:0.62rem; font-weight:600;
-  letter-spacing:0.1em; text-transform:uppercase;
-  color:var(--text-muted); margin-bottom:4px;
+.container{
+    padding:30px;
 }
-.modal-stat-val {
-  font-family:'Orbitron',monospace;
-  font-weight:700; font-size:0.95rem;
-  color:var(--text-primary);
-}
 
-/* Barra de stat en modal */
-.modal-stat-bar {
-  height:3px; background:rgba(255,255,255,0.06);
-  border-radius:99px; overflow:hidden; margin-top:6px;
-}
-.modal-stat-bar-fill {
-  height:100%; border-radius:99px;
-  background:linear-gradient(90deg,#388bfd,#a371f7);
-  box-shadow:0 0 6px rgba(56,139,253,0.4);
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:20px;
 }
 
-/* Sección precio */
-.modal-price-section {
-  background:linear-gradient(135deg,rgba(245,185,50,0.06),rgba(245,185,50,0.02));
-  border:1px solid rgba(245,185,50,0.2);
-  border-radius:var(--r-lg); padding:18px 20px;
-  display:flex; align-items:center; justify-content:space-between;
+.card{
+    background:#161a22;
+    border:1px solid #252d3b;
+    border-radius:18px;
+    overflow:hidden;
+    transition:.2s;
 }
-.price-section-label { font-size:0.72rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.1em; }
-.price-section-val {
-  font-family:'Orbitron',monospace;
-  font-weight:900; font-size:1.6rem; color:var(--gold);
-  text-shadow:0 0 20px rgba(245,185,50,0.3);
-}
-.price-section-cop { font-size:0.75rem; color:var(--text-muted); margin-top:2px; text-align:right; }
 
-/* ID de usuario para compra */
-.modal-user-id-section {
-  display:flex; flex-direction:column; gap:8px;
-}
-.modal-field-label {
-  font-size:0.75rem; font-weight:600; color:var(--text-secondary);
-  letter-spacing:0.06em;
-}
-.modal-user-input {
-  width:100%;
-  background:var(--bg-input);
-  border:1px solid var(--border-soft);
-  border-radius:var(--r-md);
-  padding:11px 14px;
-  color:var(--text-primary); font-size:0.875rem;
-  outline:none;
-  transition:border-color var(--t-med), box-shadow var(--t-med);
+.card:hover{
+    transform:translateY(-5px);
 }
-.modal-user-input::placeholder { color:var(--text-muted); }
-.modal-user-input:focus {
-  border-color:var(--border-blue);
-  box-shadow:0 0 0 3px var(--blue-glow);
-}
-.modal-field-hint { font-size:0.68rem; color:var(--text-muted); }
 
-/* Estado de compra */
-.modal-purchase-status {
-  border-radius:var(--r-md); padding:12px 16px;
-  font-size:0.82rem; font-weight:500;
-  display:none; align-items:center; gap:10px;
-}
-.modal-purchase-status.exito {
-  display:flex;
-  background:rgba(63,185,80,0.08);
-  border:1px solid rgba(63,185,80,0.25);
-  color:var(--green);
+.card img{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+    background:#0b0e13;
 }
-.modal-purchase-status.error {
-  display:flex;
-  background:rgba(248,81,73,0.08);
-  border:1px solid rgba(248,81,73,0.25);
-  color:var(--red);
-}
-.modal-purchase-status.cargando {
-  display:flex;
-  background:rgba(56,139,253,0.08);
-  border:1px solid rgba(56,139,253,0.2);
-  color:var(--blue-bright);
-}
 
-/* Botones del modal */
-.modal-actions {
-  display:flex; gap:10px; margin-top:4px;
-}
-.btn-confirmar {
-  flex:1;
-  background:linear-gradient(135deg,#388bfd,#a371f7);
-  color:#fff; font-size:0.875rem; font-weight:700;
-  padding:13px 20px; border-radius:var(--r-md);
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  box-shadow:0 4px 22px rgba(56,139,253,0.3);
-  transition:opacity var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+.info{
+    padding:20px;
 }
-.btn-confirmar:hover:not(:disabled) {
-  opacity:0.9; transform:translateY(-1px);
-  box-shadow:0 8px 30px rgba(56,139,253,0.4);
-}
-.btn-confirmar:disabled { opacity:0.45; cursor:not-allowed; transform:none; }
 
-.btn-cancelar {
-  padding:13px 20px; border-radius:var(--r-md);
-  border:1px solid var(--border-soft);
-  background:var(--bg-surface);
-  color:var(--text-secondary); font-size:0.875rem; font-weight:600;
-  transition:border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
-}
-.btn-cancelar:hover {
-  border-color:rgba(248,81,73,0.3);
-  color:var(--red); background:rgba(248,81,73,0.05);
+.vehicle-name{
+    font-size:22px;
+    font-weight:700;
 }
 
-/* Spinner */
-.spinner {
-  width:16px; height:16px; border-radius:50%;
-  border:2px solid rgba(255,255,255,0.25);
-  border-top-color:#fff;
-  animation:spin 0.7s linear infinite;
+.year{
+    color:#aab3c5;
+    margin-top:4px;
 }
-@keyframes spin { to { transform:rotate(360deg); } }
 
-/* ══════════════════════════════════════════
-   TOAST NOTIFICATIONS
-══════════════════════════════════════════ */
-#toast-container {
-  position:fixed; bottom:24px; right:24px; z-index:9000;
-  display:flex; flex-direction:column; gap:10px;
-  pointer-events:none;
-}
-.toast {
-  display:flex; align-items:center; gap:12px;
-  background:var(--bg-card);
-  border:1px solid var(--border-soft);
-  border-radius:var(--r-md);
-  padding:13px 18px;
-  box-shadow:var(--shadow-card);
-  font-size:0.85rem; font-weight:500;
-  color:var(--text-primary);
-  max-width:340px;
-  backdrop-filter:blur(16px);
-  animation:toastIn 0.35s var(--ease) both;
-  pointer-events:all;
-}
-.toast.toast-out { animation:toastOut 0.3s var(--ease) forwards; }
-@keyframes toastIn {
-  from { opacity:0; transform:translateX(60px) scale(0.92); }
-  to   { opacity:1; transform:translateX(0) scale(1); }
-}
-@keyframes toastOut {
-  from { opacity:1; transform:translateX(0); }
-  to   { opacity:0; transform:translateX(60px); }
+.price{
+    margin-top:12px;
+    font-size:28px;
+    color:#59d97b;
+    font-weight:700;
 }
-.toast-icon { font-size:1.1rem; flex-shrink:0; }
-.toast-msg  { flex:1; line-height:1.4; }
-.toast.t-success { border-left:3px solid var(--green); }
-.toast.t-error   { border-left:3px solid var(--red); }
-.toast.t-info    { border-left:3px solid var(--blue); }
-.toast.t-warning { border-left:3px solid var(--gold); }
 
-/* ══════════════════════════════════════════
-   FOOTER
-══════════════════════════════════════════ */
-.site-footer {
-  position:relative; z-index:1;
-  border-top:1px solid var(--border-dim);
-  padding:28px 24px;
-  text-align:center;
-  background:rgba(7,11,22,0.6);
-  backdrop-filter:blur(12px);
+.stat{
+    margin-top:12px;
 }
-.footer-brand {
-  font-family:'Orbitron',monospace;
-  font-weight:700; font-size:0.85rem; color:var(--text-secondary);
-  letter-spacing:0.1em;
-  margin-bottom:6px;
-}
-.footer-note {
-  font-size:0.72rem; color:var(--text-muted);
-  line-height:1.6;
-}
-
-/* ══════════════════════════════════════════
-   RESPONSIVO
-══════════════════════════════════════════ */
-@media (max-width:768px) {
-  .hero-section h1 { font-size:1.7rem; }
-  .hero-stats-row  { gap:10px; }
-  .hero-stat-card  { padding:10px 16px; }
-  .hero-stat-val   { font-size:1.1rem; }
-
-  #vehicle-grid { grid-template-columns:1fr 1fr; gap:12px; }
-  .card-name    { font-size:0.82rem; }
-  .card-img-wrap{ height:130px; }
-
-  .modal-stats-grid { grid-template-columns:1fr; }
-  .modal-actions    { flex-direction:column; }
-
-  .toolbar { gap:8px; }
-  .search-container { max-width:100%; }
 
-  .nav-tag        { display:none; }
-  .nav-logo-text  { display:none; }
-  #navbar         { padding:0 14px; }
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:5px;
 }
 
-@media (max-width:480px) {
-  #vehicle-grid { grid-template-columns:1fr; }
-  .hero-section { padding:32px 16px 24px; }
-  .toolbar, .categories-wrap, .grid-section { padding-left:14px; padding-right:14px; }
+.bar{
+    background:#222936;
+    border-radius:999px;
+    overflow:hidden;
+    height:10px;
+}
+
+.fill{
+    background:#3b82f6;
+    height:100%;
+}
+
+button{
+    width:100%;
+    margin-top:18px;
+    border:none;
+    background:#2d8cff;
+    color:white;
+    padding:15px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:700;
+}
+
+button:hover{
+    background:#1d79e8;
 }
 </style>
 </head>
+
 <body>
 
-<!-- ═══════════════════ AMBIENT ═══════════════════ -->
-<div class="ambient" aria-hidden="true">
-  <div class="ambient-blob blob-1"></div>
-  <div class="ambient-blob blob-2"></div>
-  <div class="ambient-blob blob-3"></div>
-</div>
+<header>
+    <div class="logo">🚗 Colombia RP Vehicles</div>
 
-<!-- ═══════════════════ LOADING SCREEN ═══════════════════ -->
-<div id="loading-screen" role="status" aria-label="Cargando Colombia RP">
-  <div class="loader-brand">
-    <div class="loader-logo-icon">🚗</div>
-    <div class="loader-brand-name">COLOMBIA RP</div>
-    <div class="loader-brand-sub">Concesionario Oficial · ER:LC</div>
-  </div>
-  <div class="loader-progress-wrap">
-    <div class="loader-bar-track"><div class="loader-bar-fill"></div></div>
-    <div class="loader-status" id="loader-status">Cargando vehículos...</div>
-  </div>
-</div>
-
-<!-- ═══════════════════ TOAST CONTAINER ═══════════════════ -->
-<div id="toast-container" aria-live="polite"></div>
-
-<!-- ═══════════════════ NAVBAR ═══════════════════ -->
-<nav id="navbar" role="navigation" aria-label="Navegación principal">
-  <a href="#" class="nav-logo" aria-label="Colombia RP inicio">
-    <div class="nav-logo-mark" aria-hidden="true">🏎️</div>
-    <div class="nav-logo-text">
-      <span class="nav-logo-title">COLOMBIA RP</span>
-      <span class="nav-logo-sub">Concesionario ER:LC</span>
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Buscar vehículo...">
     </div>
-  </a>
-
-  <div class="nav-divider" aria-hidden="true"></div>
-  <span class="nav-tag">⚡ Servidor Activo</span>
-
-  <div class="nav-spacer"></div>
-
-  <!-- Panel de usuario (visible cuando está logueado) -->
-  <div class="nav-user-panel" id="nav-user-panel" style="display:none" role="status" aria-label="Usuario conectado">
-    <div class="nav-avatar" id="nav-avatar" aria-hidden="true">?</div>
-    <span class="nav-username" id="nav-username">Usuario</span>
-    <div class="nav-balance-chip" id="nav-balance">$0 COP</div>
-  </div>
-
-  <!-- Botón login Discord (oculto cuando está logueado) -->
-  <button class="btn-discord-login" id="btn-discord-login" onclick="APP.login()" aria-label="Iniciar sesión con Discord">
-    <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true">
-      <path d="M13.545 1.08A13.18 13.18 0 0 0 10.27 0c-.142.25-.3.59-.41.858a12.265 12.265 0 0 0-3.72 0C6.03.59 5.87.25 5.727 0A13.159 13.159 0 0 0 2.45 1.082C.352 4.239-.215 7.32.068 10.357a13.31 13.31 0 0 0 4.064 2.066 10.07 10.07 0 0 0 .87-1.424 8.694 8.694 0 0 1-1.37-.66c.115-.084.228-.172.337-.262a9.488 9.488 0 0 0 8.063 0c.11.09.222.178.337.262a8.7 8.7 0 0 1-1.374.663c.257.507.55.988.872 1.424a13.287 13.287 0 0 0 4.068-2.066c.333-3.516-.566-6.567-2.39-9.28ZM5.34 8.48c-.803 0-1.459-.74-1.459-1.647 0-.908.636-1.65 1.459-1.65.822 0 1.473.742 1.458 1.65 0 .907-.636 1.647-1.458 1.647Zm5.32 0c-.804 0-1.46-.74-1.46-1.647 0-.908.637-1.65 1.46-1.65.822 0 1.472.742 1.457 1.65 0 .907-.635 1.647-1.457 1.647Z"/>
-    </svg>
-    Entrar con Discord
-  </button>
-</nav>
-
-<!-- ═══════════════════ HERO ═══════════════════ -->
-<header class="hero-section">
-  <div class="hero-kicker">
-    <span class="kicker-dot" aria-hidden="true"></span>
-    Concesionario Oficial — Emergency Response: Liberty County
-  </div>
-  <h1>
-    Adquiere tu vehículo<br>
-    <span class="accent-blue">ideal</span> en
-    <span class="accent-gold">Colombia RP</span>
-  </h1>
-  <p class="hero-desc">
-    Explora el catálogo completo de vehículos disponibles en el servidor. Compra con tu saldo de Discord y empieza a rodar hoy.
-  </p>
-  <div class="hero-stats-row" id="hero-stats-row">
-    <div class="hero-stat-card">
-      <div class="hero-stat-val" id="stat-total">—</div>
-      <div class="hero-stat-label">Vehículos</div>
-    </div>
-    <div class="hero-stat-card">
-      <div class="hero-stat-val" id="stat-cats">8</div>
-      <div class="hero-stat-label">Categorías</div>
-    </div>
-    <div class="hero-stat-card">
-      <div class="hero-stat-val">COP</div>
-      <div class="hero-stat-label">Economía</div>
-    </div>
-    <div class="hero-stat-card">
-      <div class="hero-stat-val">24/7</div>
-      <div class="hero-stat-label">Disponible</div>
-    </div>
-  </div>
 </header>
 
-<!-- ═══════════════════ TOOLBAR ═══════════════════ -->
-<div class="toolbar" role="search">
-  <div class="search-container">
-    <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="search" id="search-input"
-           placeholder="Buscar vehículo, marca..."
-           autocomplete="off"
-           aria-label="Buscar vehículo"/>
-  </div>
-
-  <select class="sort-select" id="sort-select" aria-label="Ordenar vehículos">
-    <option value="name">Nombre A-Z</option>
-    <option value="price-asc">Precio ↑</option>
-    <option value="price-desc">Precio ↓</option>
-    <option value="speed">Mayor velocidad</option>
-    <option value="accel">Mejor aceleración</option>
-  </select>
-
-  <div class="results-count" id="results-count" aria-live="polite">
-    <strong>0</strong> vehículos
-  </div>
+<div class="container">
+    <div class="grid" id="vehicleGrid"></div>
 </div>
 
-<!-- ═══════════════════ CATEGORÍAS ═══════════════════ -->
-<div class="categories-wrap" role="tablist" aria-label="Categorías de vehículos">
-  <div class="categories-tabs" id="categories-tabs">
-    <!-- Generadas por JS -->
-  </div>
-</div>
-
-<!-- ═══════════════════ GRILLA ═══════════════════ -->
-<main class="grid-section" role="main">
-  <div id="vehicle-grid" aria-label="Catálogo de vehículos">
-    <!-- Skeletons iniciales -->
-  </div>
-</main>
-
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
-<footer class="site-footer">
-  <div class="footer-brand">COLOMBIA RP — CONCESIONARIO ER:LC</div>
-  <div class="footer-note">
-    Este sistema no está afiliado oficialmente con Emergency Response: Liberty County.<br>
-    Todos los precios están en economía virtual del servidor Colombia RP.
-  </div>
-</footer>
-
-<!-- ═══════════════════ MODAL DE COMPRA ═══════════════════ -->
-<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-vehicle-name">
-  <div class="modal-panel">
-    <div class="modal-top-bar" aria-hidden="true"></div>
-
-    <div class="modal-header">
-      <div>
-        <div class="modal-brand" id="modal-vehicle-brand">MARCA</div>
-        <div class="modal-title" id="modal-vehicle-name">Nombre del vehículo</div>
-        <div class="modal-cat-badge" id="modal-vehicle-cat"></div>
-      </div>
-      <button class="modal-close-btn" id="modal-close-btn" aria-label="Cerrar modal">✕</button>
-    </div>
-
-    <div class="modal-img-section">
-      <div class="modal-img-wrap">
-        <img class="modal-img" id="modal-img" src="" alt="" style="display:none"/>
-        <div class="modal-img-placeholder" id="modal-img-placeholder">🚗</div>
-      </div>
-    </div>
-
-    <div class="modal-content">
-      <!-- Stats -->
-      <div class="modal-stats-grid" id="modal-stats-grid">
-        <!-- Generadas por JS -->
-      </div>
-
-      <!-- Precio -->
-      <div class="modal-price-section">
-        <div>
-          <div class="price-section-label">Precio total</div>
-          <div class="price-section-val" id="modal-price-val">$0</div>
-          <div class="price-section-cop">Pesos Colombianos (RP)</div>
-        </div>
-        <div style="font-size:2rem; opacity:0.4;" aria-hidden="true">💰</div>
-      </div>
-
-      <!-- ID de usuario -->
-      <div class="modal-user-id-section">
-        <label class="modal-field-label" for="modal-user-id">
-          Tu ID de Discord
-        </label>
-        <input type="text" class="modal-user-input" id="modal-user-id"
-               placeholder="Ej: 123456789012345678"
-               autocomplete="off"
-               inputmode="numeric"/>
-        <span class="modal-field-hint">
-          💡 Activa Modo Desarrollador en Discord → Clic derecho en tu avatar → Copiar ID
-        </span>
-      </div>
-
-      <!-- Estado de compra -->
-      <div class="modal-purchase-status" id="purchase-status" role="status"></div>
-
-      <!-- Acciones -->
-      <div class="modal-actions">
-        <button class="btn-confirmar" id="btn-confirmar" onclick="APP.confirmarCompra()">
-          <span id="btn-confirmar-icon">✅</span>
-          <span id="btn-confirmar-text">Confirmar compra</span>
-        </button>
-        <button class="btn-cancelar" id="btn-cancelar" onclick="APP.cerrarModal()">
-          Cancelar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     JAVASCRIPT PRINCIPAL
-══════════════════════════════════════════════════════════ -->
 <script>
-'use strict';
-
-/* ═══════════════════════════════════════════════════
-   ⚙️  CONFIGURACIÓN — EDITAR AQUÍ
-═══════════════════════════════════════════════════ */
-const CONFIG = {
-  // ── UnbelievaBoat API ──────────────────────────
-  // Reemplaza con tu API key real cuando esté listo
-  UNBELIEVABOAT_API_KEY: 'TU_API_KEY_UNBELIEVABOAT_AQUI',
-
-  // ID de tu servidor de Discord
-  GUILD_ID: 'TU_GUILD_ID_AQUI',
-
-  // Endpoint de la API (no cambiar salvo migración)
-  UB_BASE_URL: 'https://unbelievaboat.com/api/v1',
-
-  // ── Discord OAuth2 ─────────────────────────────
-  DISCORD_CLIENT_ID:  'TU_CLIENT_ID_DISCORD_AQUI',
-  DISCORD_REDIRECT:   'http://localhost/callback',  // Cambia a tu URL de producción
-  DISCORD_BOT_TOKEN:  'TU_BOT_TOKEN_AQUI',
-
-  // ── Conversión de precios ──────────────────────
-  // Divide el precio original entre este divisor
-  // 13.000.000 / 1000 = 13.000 COP (Colombia RP)
-  PRECIO_DIVISOR: 1000,
-
-  // ── UI ─────────────────────────────────────────
-  LOADING_DELAY_MS: 2400,
-};
-
-/* ═══════════════════════════════════════════════════
-   🚗  BASE DE DATOS DE VEHÍCULOS ER:LC
-   Fuente: ER:LC Hub (erlc-hub.pages.dev/vehicle-stats)
-   Nota: El sitio es una SPA renderizada por JS sin API
-   pública. Estos datos son extraídos y curados manualmente
-   con toda la información disponible de ER:LC Hub.
-═══════════════════════════════════════════════════ */
-const VEHICULOS_DB = [
-  /* ── CIVILES ── */
-  { id:1,  nombre:'Sedan Sport',        marca:'Chevlon',   categoria:'Civiles',      tipo:'Regular',  clase:'Car',        velocidad:135, aceleracion:5.8, frenado:3.2, precio_erlc:13000000,  img:'https://i.imgur.com/QNmEJGf.png', icono:'🚗' },
-  { id:2,  nombre:'Pickup 4x4',         marca:'Overland',  categoria:'Civiles',      tipo:'Regular',  clase:'Truck',      velocidad:118, aceleracion:7.1, frenado:4.1, precio_erlc:18000000,  img:'', icono:'🛻' },
-  { id:3,  nombre:'Hatchback City',     marca:'Takeo',     categoria:'Civiles',      tipo:'Regular',  clase:'Car',        velocidad:122, aceleracion:6.2, frenado:3.5, precio_erlc:11000000,  img:'', icono:'🚗' },
-  { id:4,  nombre:'Family SUV',         marca:'Navara',    categoria:'Civiles',      tipo:'Regular',  clase:'SUV',        velocidad:126, aceleracion:6.8, frenado:3.8, precio_erlc:24000000,  img:'', icono:'🚙' },
-  { id:5,  nombre:'Classic Coupe',      marca:'Leland',    categoria:'Civiles',      tipo:'Classic',  clase:'Car',        velocidad:128, aceleracion:6.0, frenado:3.6, precio_erlc:19000000,  img:'', icono:'🚗' },
-  { id:6,  nombre:'Cargo Van',          marca:'Bullhorn',  categoria:'Civiles',      tipo:'Regular',  clase:'Industrial', velocidad:105, aceleracion:8.5, frenado:5.0, precio_erlc:16000000,  img:'', icono:'🚐' },
-  { id:7,  nombre:'Electric Sedan',     marca:'Averon',    categoria:'Civiles',      tipo:'Electric', clase:'Car',        velocidad:148, aceleracion:3.9, frenado:2.8, precio_erlc:42000000,  img:'', icono:'⚡' },
-  { id:8,  nombre:'Crossover Sport',    marca:'Surrey',    categoria:'Civiles',      tipo:'Regular',  clase:'SUV',        velocidad:132, aceleracion:5.5, frenado:3.3, precio_erlc:31000000,  img:'', icono:'🚙' },
-
-  /* ── POLICE ── */
-  { id:9,  nombre:'Police Cruiser',     marca:'Chevlon',   categoria:'Police',       tipo:'Regular',  clase:'Car',        velocidad:148, aceleracion:4.8, frenado:2.9, precio_erlc:0,         img:'', icono:'🚔', exclusivo:true },
-  { id:10, nombre:'Police SUV',         marca:'Navara',    categoria:'Police',       tipo:'Regular',  clase:'SUV',        velocidad:140, aceleracion:5.2, frenado:3.1, precio_erlc:0,         img:'', icono:'🚔', exclusivo:true },
-  { id:11, nombre:'Police Interceptor', marca:'Stuttgart', categoria:'Police',       tipo:'Prestige', clase:'Car',        velocidad:168, aceleracion:3.8, frenado:2.4, precio_erlc:0,         img:'', icono:'🚓', exclusivo:true },
-  { id:12, nombre:'Police Motorcycle',  marca:'Sumo',      categoria:'Police',       tipo:'Regular',  clase:'Car',        velocidad:152, aceleracion:3.2, frenado:2.6, precio_erlc:0,         img:'', icono:'🏍️', exclusivo:true },
-
-  /* ── SHERIFF ── */
-  { id:13, nombre:'Sheriff Cruiser',    marca:'Chevlon',   categoria:'Sheriff',      tipo:'Regular',  clase:'Car',        velocidad:144, aceleracion:5.0, frenado:3.0, precio_erlc:0,         img:'', icono:'🚔', exclusivo:true },
-  { id:14, nombre:'Sheriff Pickup',     marca:'Overland',  categoria:'Sheriff',      tipo:'Regular',  clase:'Truck',      velocidad:132, aceleracion:5.8, frenado:3.4, precio_erlc:0,         img:'', icono:'🛻', exclusivo:true },
-  { id:15, nombre:'Sheriff SUV',        marca:'Navara',    categoria:'Sheriff',      tipo:'Regular',  clase:'SUV',        velocidad:138, aceleracion:5.3, frenado:3.2, precio_erlc:0,         img:'', icono:'🚙', exclusivo:true },
-
-  /* ── DOT ── */
-  { id:16, nombre:'Highway Patrol',     marca:'Chevlon',   categoria:'DOT',          tipo:'Regular',  clase:'Car',        velocidad:150, aceleracion:4.6, frenado:2.8, precio_erlc:0,         img:'', icono:'🚗', exclusivo:true },
-  { id:17, nombre:'DOT Truck',          marca:'Bullhorn',  categoria:'DOT',          tipo:'Regular',  clase:'Truck',      velocidad:110, aceleracion:7.8, frenado:4.5, precio_erlc:0,         img:'', icono:'🚛', exclusivo:true },
-  { id:18, nombre:'Tow Truck',          marca:'Bullhorn',  categoria:'DOT',          tipo:'Regular',  clase:'Industrial', velocidad:95,  aceleracion:9.2, frenado:5.5, precio_erlc:0,         img:'', icono:'🚛', exclusivo:true },
-
-  /* ── FIRE & RESCUE ── */
-  { id:19, nombre:'Fire Engine',        marca:'Ferdinand', categoria:'Fire & Rescue',tipo:'Regular',  clase:'Industrial', velocidad:108, aceleracion:7.5, frenado:4.2, precio_erlc:0,         img:'', icono:'🚒', exclusivo:true },
-  { id:20, nombre:'Rescue Ambulance',   marca:'Ferdinand', categoria:'Fire & Rescue',tipo:'Regular',  clase:'Industrial', velocidad:125, aceleracion:5.8, frenado:3.2, precio_erlc:0,         img:'', icono:'🚑', exclusivo:true },
-  { id:21, nombre:'Fire Chief SUV',     marca:'Navara',    categoria:'Fire & Rescue',tipo:'Regular',  clase:'SUV',        velocidad:135, aceleracion:5.5, frenado:3.0, precio_erlc:0,         img:'', icono:'🚗', exclusivo:true },
-  { id:22, nombre:'Ladder Truck',       marca:'Ferdinand', categoria:'Fire & Rescue',tipo:'Regular',  clase:'Industrial', velocidad:92,  aceleracion:10.0,frenado:6.0, precio_erlc:0,         img:'', icono:'🚒', exclusivo:true },
-
-  /* ── PREMIUM ── */
-  { id:23, nombre:'GT Sport',           marca:'Strugatti', categoria:'Premium',      tipo:'Prestige', clase:'Car',        velocidad:188, aceleracion:3.1, frenado:2.0, precio_erlc:85000000,  img:'', icono:'🏎️' },
-  { id:24, nombre:'Luxury Sedan',       marca:'Stuttgart', categoria:'Premium',      tipo:'Prestige', clase:'Car',        velocidad:175, aceleracion:3.5, frenado:2.2, precio_erlc:72000000,  img:'', icono:'🚗' },
-  { id:25, nombre:'Sport Coupe',        marca:'Falcon',    categoria:'Premium',      tipo:'Prestige', clase:'Car',        velocidad:182, aceleracion:3.2, frenado:2.1, precio_erlc:90000000,  img:'', icono:'🏎️' },
-  { id:26, nombre:'Electric GT',        marca:'Averon',    categoria:'Premium',      tipo:'Electric', clase:'Car',        velocidad:195, aceleracion:2.9, frenado:1.9, precio_erlc:120000000, img:'', icono:'⚡' },
-  { id:27, nombre:'Premium SUV',        marca:'Kovac',     categoria:'Premium',      tipo:'Prestige', clase:'SUV',        velocidad:165, aceleracion:4.0, frenado:2.5, precio_erlc:95000000,  img:'', icono:'🚙' },
-
-  /* ── EXOTIC ── */
-  { id:28, nombre:'Hypercar X1',        marca:'Celestial', categoria:'Exotic',       tipo:'Prestige', clase:'Car',        velocidad:225, aceleracion:2.3, frenado:1.6, precio_erlc:250000000, img:'', icono:'🏎️' },
-  { id:29, nombre:'Supercar V12',       marca:'Elysion',   categoria:'Exotic',       tipo:'Prestige', clase:'Car',        velocidad:215, aceleracion:2.5, frenado:1.7, precio_erlc:200000000, img:'', icono:'🏎️' },
-  { id:30, nombre:'Limited Edition RS', marca:'Strugatti', categoria:'Exotic',       tipo:'Prestige', clase:'Car',        velocidad:218, aceleracion:2.4, frenado:1.7, precio_erlc:180000000, img:'', icono:'🏎️' },
-  { id:31, nombre:'Carbon Racer',       marca:'BKM',       categoria:'Exotic',       tipo:'Prestige', clase:'Car',        velocidad:232, aceleracion:2.1, frenado:1.5, precio_erlc:320000000, img:'', icono:'🏎️' },
-  { id:32, nombre:'Arrow Prototype',    marca:'Arrow',     categoria:'Exotic',       tipo:'Prestige', clase:'Car',        velocidad:240, aceleracion:2.0, frenado:1.4, precio_erlc:400000000, img:'', icono:'🚀' },
-
-  /* ── UTILITY ── */
-  { id:33, nombre:'Pickup Work',        marca:'Terrain',   categoria:'Utility',      tipo:'Regular',  clase:'Truck',      velocidad:112, aceleracion:7.8, frenado:4.3, precio_erlc:22000000,  img:'', icono:'🛻' },
-  { id:34, nombre:'Box Truck',          marca:'Bullhorn',  categoria:'Utility',      tipo:'Regular',  clase:'Industrial', velocidad:98,  aceleracion:9.5, frenado:5.2, precio_erlc:28000000,  img:'', icono:'🚛' },
-  { id:35, nombre:'Off-Road 4x4',       marca:'Vellfire',  categoria:'Utility',      tipo:'Regular',  clase:'SUV',        velocidad:120, aceleracion:6.5, frenado:3.8, precio_erlc:35000000,  img:'', icono:'🚙' },
-  { id:36, nombre:'Heavy Truck',        marca:'Bullhorn',  categoria:'Utility',      tipo:'Regular',  clase:'Industrial', velocidad:88,  aceleracion:11.0,frenado:6.5, precio_erlc:45000000,  img:'', icono:'🚛' },
+const vehicles = [
+{
+    name:"Chevlon Captain",
+    year:"1992",
+    price:"13.000",
+    speed:70,
+    accel:58,
+    braking:63,
+    image:"https://cdn.discordapp.com/attachments/1052021778697156678/1370860553671653427/car1.png"
+},
+{
+    name:"Falcon Prime Eques",
+    year:"2022",
+    price:"49.500",
+    speed:88,
+    accel:81,
+    braking:77,
+    image:"https://cdn.discordapp.com/attachments/1052021778697156678/1370860553671653427/car1.png"
+},
+{
+    name:"Bullhorn Buffalo",
+    year:"2019",
+    price:"35.000",
+    speed:82,
+    accel:73,
+    braking:69,
+    image:"https://cdn.discordapp.com/attachments/1052021778697156678/1370860553671653427/car1.png"
+},
+{
+    name:"Celestial Truck",
+    year:"2020",
+    price:"22.000",
+    speed:61,
+    accel:48,
+    braking:57,
+    image:"https://cdn.discordapp.com/attachments/1052021778697156678/1370860553671653427/car1.png"
+}
 ];
 
-/* ═══════════════════════════════════════════════════
-   🛠️  UTILIDADES
-═══════════════════════════════════════════════════ */
-const Utils = {
-  /** Formatea precio al estilo Colombia RP ($13.000 COP) */
-  formatPrecioCOP(precioErlc) {
-    if (!precioErlc || precioErlc === 0) return 'Exclusivo';
-    const reducido = Math.floor(precioErlc / CONFIG.PRECIO_DIVISOR);
-    return '$' + reducido.toLocaleString('es-CO') + ' COP';
-  },
+const grid = document.getElementById("vehicleGrid");
 
-  /** Devuelve el número puro dividido */
-  getPrecioReducido(precioErlc) {
-    return Math.floor(precioErlc / CONFIG.PRECIO_DIVISOR);
-  },
+function renderVehicles(list){
+    grid.innerHTML = "";
 
-  /** Normaliza velocidad a porcentaje (max=240 MPH referencia) */
-  velocidadPct(vel) {
-    return Math.min(100, Math.round((vel / 240) * 100));
-  },
+    list.forEach(car => {
+        grid.innerHTML += `
+        <div class="card">
+            <img src="${car.image}" alt="${car.name}">
+            <div class="info">
 
-  /** Normaliza aceleración a porcentaje (menor=mejor; ref min=2, max=12) */
-  aceleracionPct(accel) {
-    return Math.min(100, Math.round(((12 - accel) / 10) * 100));
-  },
+                <div class="vehicle-name">
+                    ${car.name}
+                </div>
 
-  /** Color de categoría */
-  catColor(cat) {
-    const mapa = {
-      'Civiles':      '#388bfd',
-      'Police':       '#1f6feb',
-      'Sheriff':      '#d29922',
-      'DOT':          '#f78166',
-      'Fire & Rescue':'#f85149',
-      'Premium':      '#a371f7',
-      'Exotic':       '#db61a2',
-      'Utility':      '#6e7681',
-    };
-    return mapa[cat] || '#388bfd';
-  },
+                <div class="year">
+                    ${car.year}
+                </div>
 
-  /** Degradado de categoría */
-  catGradient(cat) {
-    const mapa = {
-      'Civiles':      'linear-gradient(135deg,#388bfd,#39d0d8)',
-      'Police':       'linear-gradient(135deg,#1f6feb,#388bfd)',
-      'Sheriff':      'linear-gradient(135deg,#9e6a03,#d29922)',
-      'DOT':          'linear-gradient(135deg,#da3633,#f78166)',
-      'Fire & Rescue':'linear-gradient(135deg,#b91c1c,#f85149)',
-      'Premium':      'linear-gradient(135deg,#6e40c9,#a371f7)',
-      'Exotic':       'linear-gradient(135deg,#a21caf,#db61a2)',
-      'Utility':      'linear-gradient(135deg,#444c56,#6e7681)',
-    };
-    return mapa[cat] || 'linear-gradient(135deg,#388bfd,#a371f7)';
-  },
+                <div class="price">
+                    COP ${car.price}
+                </div>
 
-  /** Icono de categoría */
-  catIcono(cat) {
-    const mapa = {
-      'Civiles':      '🚗',
-      'Police':       '🚔',
-      'Sheriff':      '⭐',
-      'DOT':          '🛣️',
-      'Fire & Rescue':'🚒',
-      'Premium':      '💎',
-      'Exotic':       '🏎️',
-      'Utility':      '🔧',
-    };
-    return mapa[cat] || '🚗';
-  },
+                <div class="stat">
+                    <div class="stat-top">
+                        <span>Velocidad</span>
+                        <span>${car.speed}</span>
+                    </div>
+                    <div class="bar">
+                        <div class="fill" style="width:${car.speed}%"></div>
+                    </div>
+                </div>
 
-  /** Muestra un toast */
-  toast(msg, tipo = 'info', duracion = 4000) {
-    const iconos = { success:'✅', error:'❌', info:'ℹ️', warning:'⚠️' };
-    const c = document.getElementById('toast-container');
-    const t = document.createElement('div');
-    t.className = `toast t-${tipo}`;
-    t.innerHTML = `<span class="toast-icon" aria-hidden="true">${iconos[tipo]||'ℹ️'}</span>
-                   <span class="toast-msg">${msg}</span>`;
-    c.appendChild(t);
-    setTimeout(() => {
-      t.classList.add('toast-out');
-      setTimeout(() => t.remove(), 350);
-    }, duracion);
-  },
+                <div class="stat">
+                    <div class="stat-top">
+                        <span>Aceleración</span>
+                        <span>${car.accel}</span>
+                    </div>
+                    <div class="bar">
+                        <div class="fill" style="width:${car.accel}%"></div>
+                    </div>
+                </div>
 
-  /** Sanitiza cadena para HTML */
-  esc(str) {
-    const d = document.createElement('div');
-    d.textContent = String(str);
-    return d.innerHTML;
-  },
-};
+                <div class="stat">
+                    <div class="stat-top">
+                        <span>Frenado</span>
+                        <span>${car.braking}</span>
+                    </div>
+                    <div class="bar">
+                        <div class="fill" style="width:${car.braking}%"></div>
+                    </div>
+                </div>
 
-/* ═══════════════════════════════════════════════════
-   💾  ESTADO DE LA APLICACIÓN
-═══════════════════════════════════════════════════ */
-const Estado = {
-  vehiculos:       [],    // Todos los vehículos
-  filtrados:       [],    // Después de filtros
-  categoriaActiva: 'all', // Tab activo
-  busqueda:        '',    // Texto de búsqueda
-  orden:           'name',// Criterio de orden
-  vehiculoModal:   null,  // Vehículo en el modal
-  usuarioLogueado: false,
-  usuario: {
-    id:       null,
-    username: null,
-    avatar:   null,
-    balance:  0,
-  },
-};
+                <button onclick="buyVehicle('${car.name}', '${car.price}')">
+                    Adquirir
+                </button>
 
-/* ═══════════════════════════════════════════════════
-   🌐  API UNBELIEVABOAT
-   Prepara las llamadas a la API del bot de economía
-═══════════════════════════════════════════════════ */
-const APIEconomia = {
-  /** Cabeceras comunes */
-  _headers() {
-    return {
-      'Authorization': CONFIG.UNBELIEVABOAT_API_KEY,
-      'Content-Type':  'application/json',
-    };
-  },
-
-  /**
-   * Obtiene el balance de un usuario
-   * @param {string} userId - Discord user ID
-   * @returns {Promise<{cash:number, bank:number, total:number}>}
-   */
-  async getBalance(userId) {
-    // ⚠️ NOTA: La API de UnbelievaBoat tiene restricciones CORS.
-    // En producción debes proxear las llamadas a través de un backend.
-    // Aquí simulamos la respuesta para demostración.
-    if (CONFIG.UNBELIEVABOAT_API_KEY === 'TU_API_KEY_UNBELIEVABOAT_AQUI') {
-      // MODO DEMO: simula un balance aleatorio
-      const balanceSim = Math.floor(Math.random() * 500000) + 50000;
-      return { cash: balanceSim, bank: 0, total: balanceSim };
-    }
-
-    try {
-      const url = `${CONFIG.UB_BASE_URL}/guilds/${CONFIG.GUILD_ID}/users/${userId}`;
-      const res = await fetch(url, { headers: this._headers() });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      return { cash: data.cash || 0, bank: data.bank || 0, total: (data.cash||0) + (data.bank||0) };
-    } catch (e) {
-      console.error('[APIEconomia.getBalance]', e);
-      throw new Error('No se pudo verificar el balance. Revisa tu configuración.');
-    }
-  },
-
-  /**
-   * Descuenta dinero del usuario
-   * @param {string} userId  - Discord user ID
-   * @param {number} monto   - Monto a descontar (positivo)
-   * @returns {Promise<boolean>}
-   */
-  async descontarBalance(userId, monto) {
-    if (CONFIG.UNBELIEVABOAT_API_KEY === 'TU_API_KEY_UNBELIEVABOAT_AQUI') {
-      // MODO DEMO: simula transacción exitosa
-      return true;
-    }
-
-    try {
-      const url = `${CONFIG.UB_BASE_URL}/guilds/${CONFIG.GUILD_ID}/users/${userId}`;
-      const body = JSON.stringify({ cash: -Math.abs(monto) }); // negativo = restar
-      const res = await fetch(url, {
-        method:  'PATCH',
-        headers: this._headers(),
-        body,
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return true;
-    } catch (e) {
-      console.error('[APIEconomia.descontarBalance]', e);
-      throw new Error('Error al procesar el pago. Intenta de nuevo.');
-    }
-  },
-};
-
-/* ═══════════════════════════════════════════════════
-   🔐  AUTH DISCORD (Preparado para OAuth2)
-═══════════════════════════════════════════════════ */
-const AuthDiscord = {
-  /**
-   * Inicia el flujo de OAuth2 con Discord
-   * ─────────────────────────────────────────────
-   * Para activar el login real:
-   * 1. Crea una app en discord.com/developers
-   * 2. Pon tu CLIENT_ID en CONFIG.DISCORD_CLIENT_ID
-   * 3. Agrega tu REDIRECT_URI en CONFIG.DISCORD_REDIRECT
-   *    (también en el portal de Discord)
-   * 4. Implementa el endpoint /callback en tu servidor
-   *    para capturar el código y obtener el access_token
-   * ─────────────────────────────────────────────
-   */
-  login() {
-    if (CONFIG.DISCORD_CLIENT_ID === 'TU_CLIENT_ID_DISCORD_AQUI') {
-      // MODO DEMO: simula login
-      this._simularLogin();
-      return;
-    }
-    const params = new URLSearchParams({
-      client_id:     CONFIG.DISCORD_CLIENT_ID,
-      redirect_uri:  CONFIG.DISCORD_REDIRECT,
-      response_type: 'code',
-      scope:         'identify',
-    });
-    window.location.href = `https://discord.com/oauth2/authorize?${params}`;
-  },
-
-  /** Simula un login para demostración */
-  _simularLogin() {
-    Estado.usuarioLogueado = true;
-    Estado.usuario = {
-      id:       '123456789012345678',
-      username: 'ColombianoRP',
-      avatar:   null,
-      balance:  247000,
-    };
-    UI.actualizarNavUser();
-    Utils.toast('¡Bienvenido, ColombianoRP! (modo demo)', 'success');
-  },
-
-  logout() {
-    Estado.usuarioLogueado = false;
-    Estado.usuario = { id:null, username:null, avatar:null, balance:0 };
-    UI.actualizarNavUser();
-    Utils.toast('Sesión cerrada.', 'info');
-  },
-};
-
-/* ═══════════════════════════════════════════════════
-   🎨  UI — Renderizado
-═══════════════════════════════════════════════════ */
-const UI = {
-  /** Construye los tabs de categorías */
-  renderCategorias() {
-    const categorias = ['all', ...new Set(VEHICULOS_DB.map(v => v.categoria))];
-    const tabs = document.getElementById('categories-tabs');
-    tabs.innerHTML = '';
-
-    const conteo = {};
-    VEHICULOS_DB.forEach(v => { conteo[v.categoria] = (conteo[v.categoria]||0) + 1; });
-
-    categorias.forEach(cat => {
-      const btn = document.createElement('button');
-      btn.className = 'cat-btn' + (cat === Estado.categoriaActiva ? ' activo' : '');
-      btn.dataset.cat = cat;
-      btn.setAttribute('role', 'tab');
-      btn.setAttribute('aria-selected', cat === Estado.categoriaActiva);
-
-      const icono = cat === 'all' ? '🌐' : Utils.catIcono(cat);
-      const label = cat === 'all' ? 'Todos' : cat;
-      const num   = cat === 'all' ? VEHICULOS_DB.length : (conteo[cat]||0);
-      const color = cat === 'all' ? '#388bfd' : Utils.catColor(cat);
-
-      btn.innerHTML = `
-        <span class="cat-pip" style="background:${color}" aria-hidden="true"></span>
-        ${Utils.esc(icono)} ${Utils.esc(label)}
-        <span style="opacity:0.5;font-size:0.7rem">${num}</span>
-      `;
-      btn.addEventListener('click', () => APP.filtrarCategoria(cat));
-      tabs.appendChild(btn);
-    });
-  },
-
-  /** Muestra skeletons mientras carga */
-  renderSkeletons(n = 8) {
-    const grid = document.getElementById('vehicle-grid');
-    grid.innerHTML = '';
-    for (let i = 0; i < n; i++) {
-      grid.innerHTML += `
-        <div class="skeleton-card" aria-hidden="true">
-          <div class="skeleton-img"></div>
-          <div class="skeleton-body">
-            <div class="skeleton-line w60"></div>
-            <div class="skeleton-line w80 h16"></div>
-            <div class="skeleton-line w40"></div>
-            <div class="skeleton-line w60"></div>
-          </div>
-        </div>`;
-    }
-  },
-
-  /** Renderiza la grilla de vehículos */
-  renderGrid(vehiculos) {
-    const grid = document.getElementById('vehicle-grid');
-    grid.innerHTML = '';
-
-    document.getElementById('results-count').innerHTML =
-      `<strong>${vehiculos.length}</strong> vehículo${vehiculos.length !== 1 ? 's' : ''}`;
-
-    if (vehiculos.length === 0) {
-      grid.innerHTML = `
-        <div class="empty-state" role="status">
-          <div class="empty-icon">🔍</div>
-          <div class="empty-title">Sin resultados</div>
-          <div class="empty-desc">No encontramos vehículos con esos filtros. Intenta con otra búsqueda o categoría.</div>
-        </div>`;
-      return;
-    }
-
-    vehiculos.forEach((v, idx) => {
-      const precio = Utils.formatPrecioCOP(v.precio_erlc);
-      const velPct = Utils.velocidadPct(v.velocidad);
-      const accPct = Utils.aceleracionPct(v.aceleracion);
-      const catColor = Utils.catColor(v.categoria);
-      const catGrad  = Utils.catGradient(v.categoria);
-      const esExclusivo = v.exclusivo === true || v.precio_erlc === 0;
-
-      const card = document.createElement('div');
-      card.className = 'vehicle-card';
-      card.style.animationDelay = `${idx * 40}ms`;
-      card.setAttribute('role', 'article');
-      card.setAttribute('aria-label', `${v.nombre} — ${v.marca}`);
-
-      card.innerHTML = `
-        <!-- Ribbon de categoría -->
-        <div class="card-cat-badge"
-             style="background:${catGrad}"
-             aria-label="Categoría: ${Utils.esc(v.categoria)}">
-          ${Utils.esc(v.categoria)}
+            </div>
         </div>
-
-        <!-- Imagen -->
-        <div class="card-img-wrap">
-          <div class="card-img-bg"></div>
-          ${v.img
-            ? `<img class="card-img" src="${Utils.esc(v.img)}" alt="${Utils.esc(v.nombre)}" loading="lazy"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-               <div class="card-img-placeholder" style="display:none" aria-hidden="true">${v.icono}</div>`
-            : `<div class="card-img-placeholder" aria-hidden="true">${v.icono}</div>`
-          }
-        </div>
-
-        <!-- Cuerpo -->
-        <div class="card-body">
-          <div>
-            <div class="card-brand">${Utils.esc(v.marca)} · ${Utils.esc(v.tipo)}</div>
-            <div class="card-name">${Utils.esc(v.nombre)}</div>
-          </div>
-
-          <!-- Stats rápidos -->
-          <div class="card-stats">
-            <div class="stat-item">
-              <div class="stat-label">Vel. Máx</div>
-              <div class="stat-val">${v.velocidad} MPH</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">0-60 MPH</div>
-              <div class="stat-val">${v.aceleracion}s</div>
-            </div>
-          </div>
-
-          <!-- Barra de velocidad -->
-          <div class="speed-bar-wrap">
-            <div class="speed-bar-label">
-              <span>Velocidad</span>
-              <span>${velPct}%</span>
-            </div>
-            <div class="speed-bar-track">
-              <div class="speed-bar-fill" style="width:${velPct}%; background:${catGrad}"></div>
-            </div>
-          </div>
-
-          <!-- Footer -->
-          <div class="card-footer">
-            <div class="card-price">
-              <span class="price-label">Precio</span>
-              <span class="price-amount">${Utils.esc(precio)}</span>
-            </div>
-            <button class="btn-adquirir"
-                    aria-label="Adquirir ${Utils.esc(v.nombre)}"
-                    onclick="event.stopPropagation(); APP.abrirModal(${v.id})">
-              ${esExclusivo ? '🔒 Exclusivo' : '🛒 Adquirir'}
-            </button>
-          </div>
-        </div>
-      `;
-
-      card.addEventListener('click', () => APP.abrirModal(v.id));
-      grid.appendChild(card);
+        `;
     });
+}
 
-    // Stat total
-    document.getElementById('stat-total').textContent = VEHICULOS_DB.length;
-  },
+function buyVehicle(name, price){
+    alert(
+        `Comprar ${name}\n\nPrecio: COP ${price}\n\nLuego conectaremos esto a UnbelievaBoat`
+    );
+}
 
-  /** Actualiza los tabs de categoría (activo/inactivo) */
-  actualizarTabs() {
-    document.querySelectorAll('.cat-btn').forEach(btn => {
-      const activo = btn.dataset.cat === Estado.categoriaActiva;
-      btn.classList.toggle('activo', activo);
-      btn.setAttribute('aria-selected', activo);
-    });
-  },
+document.getElementById("search")
+.addEventListener("input", function(){
 
-  /** Actualiza la barra de usuario en el navbar */
-  actualizarNavUser() {
-    const panel  = document.getElementById('nav-user-panel');
-    const btnLog = document.getElementById('btn-discord-login');
+    const value = this.value.toLowerCase();
 
-    if (Estado.usuarioLogueado && Estado.usuario.username) {
-      panel.style.display  = 'flex';
-      btnLog.style.display = 'none';
-      document.getElementById('nav-avatar').textContent   = Estado.usuario.username[0].toUpperCase();
-      document.getElementById('nav-username').textContent = Estado.usuario.username;
-      document.getElementById('nav-balance').textContent  = Utils.formatPrecioCOP(Estado.usuario.balance * CONFIG.PRECIO_DIVISOR) + ' bal.';
-    } else {
-      panel.style.display  = 'none';
-      btnLog.style.display = 'flex';
-    }
-  },
+    const filtered = vehicles.filter(car =>
+        car.name.toLowerCase().includes(value)
+    );
 
-  /** Abre el modal con la información de un vehículo */
-  abrirModal(vehiculo) {
-    const v        = vehiculo;
-    const precio   = Utils.formatPrecioCOP(v.precio_erlc);
-    const catGrad  = Utils.catGradient(v.categoria);
-    const velPct   = Utils.velocidadPct(v.velocidad);
-    const accPct   = Utils.aceleracionPct(v.aceleracion);
-    const frenPct  = Math.min(100, Math.round(((6 - v.frenado) / 4) * 100));
+    renderVehicles(filtered);
+});
 
-    // Cabecera
-    document.getElementById('modal-vehicle-brand').textContent = `${v.marca} · ${v.tipo} · ${v.clase}`;
-    document.getElementById('modal-vehicle-name').textContent  = v.nombre;
-
-    // Badge categoría
-    const catBadge = document.getElementById('modal-vehicle-cat');
-    catBadge.textContent = v.categoria;
-    catBadge.style.background = catGrad;
-
-    // Imagen
-    const imgEl  = document.getElementById('modal-img');
-    const phEl   = document.getElementById('modal-img-placeholder');
-    if (v.img) {
-      imgEl.src = v.img; imgEl.alt = v.nombre;
-      imgEl.style.display = 'block'; phEl.style.display = 'none';
-      imgEl.onerror = () => { imgEl.style.display='none'; phEl.style.display='block'; phEl.textContent=v.icono; };
-    } else {
-      imgEl.style.display = 'none';
-      phEl.style.display  = 'block';
-      phEl.textContent    = v.icono;
-    }
-
-    // Stats grid
-    const statsGrid = document.getElementById('modal-stats-grid');
-    const statsData = [
-      { label:'Vel. Máxima',  val:`${v.velocidad} MPH`, pct:velPct },
-      { label:'0-60 MPH',     val:`${v.aceleracion}s`,  pct:accPct },
-      { label:'Frenado 60-0', val:`${v.frenado}s`,      pct:frenPct },
-      { label:'Clase',        val:v.clase,               pct:null },
-      { label:'Tipo',         val:v.tipo,                pct:null },
-      { label:'Categoría',    val:v.categoria,           pct:null },
-    ];
-    statsGrid.innerHTML = statsData.map(s => `
-      <div class="modal-stat-item">
-        <div class="modal-stat-label">${Utils.esc(s.label)}</div>
-        <div class="modal-stat-val">${Utils.esc(s.val)}</div>
-        ${s.pct !== null ? `
-          <div class="modal-stat-bar">
-            <div class="modal-stat-bar-fill" style="width:${s.pct}%; background:${catGrad}"></div>
-          </div>` : ''}
-      </div>
-    `).join('');
-
-    // Precio
-    document.getElementById('modal-price-val').textContent = precio;
-
-    // Resetear estado
-    const statusEl = document.getElementById('purchase-status');
-    statusEl.className    = 'modal-purchase-status';
-    statusEl.innerHTML    = '';
-    statusEl.style.display= 'none';
-    document.getElementById('modal-user-id').value = '';
-    this._resetBtnConfirmar();
-
-    // Abrir overlay
-    document.getElementById('modal-overlay').classList.add('abierto');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('modal-user-id').focus(), 300);
-  },
-
-  cerrarModal() {
-    document.getElementById('modal-overlay').classList.remove('abierto');
-    document.body.style.overflow = '';
-    Estado.vehiculoModal = null;
-  },
-
-  _resetBtnConfirmar() {
-    const btn  = document.getElementById('btn-confirmar');
-    btn.disabled = false;
-    document.getElementById('btn-confirmar-icon').textContent = '✅';
-    document.getElementById('btn-confirmar-text').textContent = 'Confirmar compra';
-  },
-
-  _setBtnConfirmandoCargando() {
-    const btn  = document.getElementById('btn-confirmar');
-    btn.disabled = true;
-    document.getElementById('btn-confirmar-icon').innerHTML = '<div class="spinner"></div>';
-    document.getElementById('btn-confirmar-text').textContent = 'Procesando...';
-  },
-
-  mostrarEstadoCompra(tipo, msg) {
-    const el = document.getElementById('purchase-status');
-    el.className = `modal-purchase-status ${tipo}`;
-    el.style.display = 'flex';
-    const iconos = { exito:'✅', error:'❌', cargando:'⏳' };
-    el.innerHTML = `<span aria-hidden="true">${iconos[tipo]||'ℹ️'}</span> <span>${Utils.esc(msg)}</span>`;
-  },
-};
-
-/* ═══════════════════════════════════════════════════
-   🎮  APP — Controlador principal
-═══════════════════════════════════════════════════ */
-const APP = {
-  /** Inicialización */
-  async init() {
-    // Mostrar skeletons durante la carga
-    UI.renderSkeletons(8);
-
-    // Simular carga de datos
-    await this._simularCargaDatos();
-
-    // Cargar vehículos al estado
-    Estado.vehiculos = [...VEHICULOS_DB];
-
-    // Construir UI
-    UI.renderCategorias();
-    this._aplicarFiltros();
-
-    // Eventos
-    this._bindEventos();
-
-    // Ocultar loading screen
-    setTimeout(() => {
-      document.getElementById('loading-screen').classList.add('oculto');
-    }, CONFIG.LOADING_DELAY_MS);
-  },
-
-  /** Simula latencia de carga para mostrar la pantalla de carga */
-  _simularCargaDatos() {
-    const msgs = ['Conectando con ER:LC Hub...', 'Cargando vehículos...', '¡Listo!'];
-    let i = 0;
-    return new Promise(resolve => {
-      const iv = setInterval(() => {
-        document.getElementById('loader-status').textContent = msgs[i] || msgs[msgs.length-1];
-        i++;
-        if (i >= msgs.length) clearInterval(iv);
-      }, 700);
-      setTimeout(resolve, CONFIG.LOADING_DELAY_MS - 200);
-    });
-  },
-
-  /** Enlaza todos los eventos */
-  _bindEventos() {
-    // Búsqueda
-    const searchInput = document.getElementById('search-input');
-    let debounceTimer;
-    searchInput.addEventListener('input', () => {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => {
-        Estado.busqueda = searchInput.value.trim().toLowerCase();
-        this._aplicarFiltros();
-      }, 250);
-    });
-
-    // Ordenamiento
-    document.getElementById('sort-select').addEventListener('change', e => {
-      Estado.orden = e.target.value;
-      this._aplicarFiltros();
-    });
-
-    // Cerrar modal con Escape
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && document.getElementById('modal-overlay').classList.contains('abierto')) {
-        this.cerrarModal();
-      }
-    });
-
-    // Cerrar modal al hacer clic fuera
-    document.getElementById('modal-overlay').addEventListener('click', e => {
-      if (e.target === document.getElementById('modal-overlay')) this.cerrarModal();
-    });
-
-    // Botón cerrar modal
-    document.getElementById('modal-close-btn').addEventListener('click', () => this.cerrarModal());
-  },
-
-  /** Aplica filtros y re-renderiza */
-  _aplicarFiltros() {
-    let resultado = [...Estado.vehiculos];
-
-    // Filtro categoría
-    if (Estado.categoriaActiva !== 'all') {
-      resultado = resultado.filter(v => v.categoria === Estado.categoriaActiva);
-    }
-
-    // Filtro búsqueda
-    if (Estado.busqueda) {
-      resultado = resultado.filter(v =>
-        v.nombre.toLowerCase().includes(Estado.busqueda) ||
-        v.marca.toLowerCase().includes(Estado.busqueda)  ||
-        v.categoria.toLowerCase().includes(Estado.busqueda)
-      );
-    }
-
-    // Ordenamiento
-    resultado.sort((a, b) => {
-      switch (Estado.orden) {
-        case 'name':       return a.nombre.localeCompare(b.nombre);
-        case 'price-asc':  return a.precio_erlc - b.precio_erlc;
-        case 'price-desc': return b.precio_erlc - a.precio_erlc;
-        case 'speed':      return b.velocidad - a.velocidad;
-        case 'accel':      return a.aceleracion - b.aceleracion;
-        default:           return 0;
-      }
-    });
-
-    Estado.filtrados = resultado;
-    UI.renderGrid(resultado);
-  },
-
-  /** Cambia de categoría */
-  filtrarCategoria(cat) {
-    Estado.categoriaActiva = cat;
-    UI.actualizarTabs();
-    this._aplicarFiltros();
-  },
-
-  /** Abre el modal de un vehículo por ID */
-  abrirModal(id) {
-    const v = VEHICULOS_DB.find(x => x.id === id);
-    if (!v) return;
-    Estado.vehiculoModal = v;
-    UI.abrirModal(v);
-  },
-
-  /** Cierra el modal */
-  cerrarModal() {
-    UI.cerrarModal();
-  },
-
-  /** Login con Discord */
-  login() {
-    AuthDiscord.login();
-  },
-
-  /** Confirma y procesa la compra */
-  async confirmarCompra() {
-    const v = Estado.vehiculoModal;
-    if (!v) return;
-
-    // Vehículos exclusivos (gobierno/emergencias)
-    if (v.exclusivo || v.precio_erlc === 0) {
-      UI.mostrarEstadoCompra('error', 'Este vehículo es exclusivo del gobierno y no está disponible para compra.');
-      return;
-    }
-
-    // Obtener ID del usuario
-    const userId = document.getElementById('modal-user-id').value.trim();
-    if (!userId || !/^\d{17,19}$/.test(userId)) {
-      UI.mostrarEstadoCompra('error', 'Por favor ingresa un ID de Discord válido (17-19 dígitos).');
-      Utils.toast('ID de Discord inválido.', 'warning');
-      return;
-    }
-
-    const precioFinal = Utils.getPrecioReducido(v.precio_erlc);
-
-    // Iniciar proceso
-    UI._setBtnConfirmandoCargando();
-    UI.mostrarEstadoCompra('cargando', 'Verificando tu saldo en el servidor...');
-
-    try {
-      // 1. Verificar balance
-      const balance = await APIEconomia.getBalance(userId);
-      const saldoCOP = balance.cash; // El saldo ya está en formato Colombia RP
-
-      if (saldoCOP < precioFinal) {
-        UI.mostrarEstadoCompra(
-          'error',
-          `Saldo insuficiente. Tienes $${saldoCOP.toLocaleString('es-CO')} COP y el vehículo cuesta ${Utils.formatPrecioCOP(v.precio_erlc)}.`
-        );
-        UI._resetBtnConfirmar();
-        Utils.toast('Saldo insuficiente.', 'error');
-        return;
-      }
-
-      // 2. Procesar pago
-      UI.mostrarEstadoCompra('cargando', 'Procesando el pago...');
-      await APIEconomia.descontarBalance(userId, precioFinal);
-
-      // 3. Confirmación exitosa
-      UI.mostrarEstadoCompra(
-        'exito',
-        `¡Compra exitosa! ${v.nombre} agregado a tu garage. Saldo restante: $${(saldoCOP - precioFinal).toLocaleString('es-CO')} COP`
-      );
-      document.getElementById('btn-confirmar-icon').textContent = '🎉';
-      document.getElementById('btn-confirmar-text').textContent  = '¡Comprado!';
-
-      Utils.toast(`¡${v.nombre} es tuyo! 🚗 Disfrútalo en Colombia RP.`, 'success', 6000);
-
-      // Cerrar modal tras éxito
-      setTimeout(() => this.cerrarModal(), 3500);
-
-    } catch (err) {
-      UI.mostrarEstadoCompra('error', err.message || 'Error inesperado. Intenta de nuevo.');
-      UI._resetBtnConfirmar();
-      Utils.toast('Error en la transacción: ' + err.message, 'error');
-    }
-  },
-};
-
-/* ═══════════════════════════════════════════════════
-   🚀  ARRANQUE
-═══════════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', () => APP.init());
+renderVehicles(vehicles);
 </script>
+
 </body>
 </html>
